@@ -70,3 +70,6 @@ template&lt;int N&gt; auto get(Foo const &amp; foo)
 </td>
 </tr>
 </table>
+
+
+P.S. `if constexpr (expression)` doesn't _check_ if the expression is constexpr.  The expression _must_ be constexpr (else it doesn't compile).  The part that is constexpr is the entire if.  Don't think about this and what syntax might be better.  The committee argued about it long enough.
