@@ -59,9 +59,9 @@ public:
 
 template&lt;int N&gt; auto get(Foo const &amp; foo)
 {
-  if constexpr (N == 0)
+  if constexpr (N == 0)  // !! LOOK HERE !!
      return foo.refInt();
-  else if constexpr (N == 1)
+  else if constexpr (N == 1)    // !! LOOK HERE !!
      return foo.refString();
   else
      static_assert(false, "Foo only has 2 members");
