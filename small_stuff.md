@@ -189,3 +189,42 @@ void random_fill(SomeInts &amp; container,
 </table>
 
 **[[maybe_unused]]**
+
+
+
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td  valign="top">
+<pre lang="cpp">
+   bool res = step1();
+   assert(b);
+   step2();
+   etc();
+</pre>
+</td>
+<td  valign="top">
+<pre lang="cpp">
+   [[maybe_unused]] bool res = step1();
+   assert(b);
+   step2();
+   etc();
+</pre>
+</td>
+</tr>
+<tr>
+<th>Compiler</th>
+<th>C++17 Compiler</th>
+</tr>
+<tr>
+<td>warning: unused variable 'b'</td>
+<td></td>
+</tr>
+</table>
