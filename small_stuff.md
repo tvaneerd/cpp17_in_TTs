@@ -74,6 +74,8 @@ some new [[attributes]]
 ---
 
 
+**[[fallthrough]]**
+
 <table>
 <tr>
 <th>
@@ -127,5 +129,63 @@ case bad:
 </tr>
 </table>
 
+**[[nodiscard]]**
 
-warning: ignoring return value of 'bool f()', declared with attribute nodiscard 
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td  valign="top">
+<pre lang="cpp">
+struct SomeInts
+{
+   bool empty();
+   void push_back(int);
+   //etc
+};
+
+void random_fill(SomeInts &amp; container,
+      int min, int max, int count)
+{
+   container.empty(); // empty it first
+   for (int num : gen_rand(min, max, count))
+      container.push_back(num);
+}
+</pre>
+</td>
+<td  valign="top">
+<pre lang="cpp">
+struct SomeInts
+{
+   [[nodiscard]] bool empty();
+   void push_back(int);
+   //etc
+};
+
+void random_fill(SomeInts &amp; container,
+      int min, int max, int count)
+{
+   container.empty(); // empty it first
+   for (int num : gen_rand(min, max, count))
+      container.push_back(num);
+}
+</pre>
+</td>
+</tr>
+<tr>
+<th>Compiler</th>
+<th>C++17 Compiler</th>
+</tr>
+<tr>
+<td></td>
+<td>warning: ignoring return value of 'bool empty()'</td>
+</tr>
+</table>
+
+**[[maybe_unused]]**
