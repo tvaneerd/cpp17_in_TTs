@@ -78,3 +78,29 @@ C++17
 </td>
 </tr>
 </table>
+
+Switch statements too!
+
+
+<table>
+<tr>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td  valign="top">
+<pre lang="cpp">
+{
+   switch (Device dev = get_device(); dev.state())
+   {
+   case sleep: /*...*/ break;
+   case ready: /*...*/ break;
+   case bad: /*...*/ break;
+   }
+}
+</pre>
+</td>
+</tr>
+</table>
+
