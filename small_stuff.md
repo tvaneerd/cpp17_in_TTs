@@ -253,13 +253,5 @@ C++17
 </pre>
 </td>
 </tr>
-<tr>
-<th>Compiler</th>
-<th>C++17 Compiler</th>
-</tr>
-<tr>
-<td>warning: unused function 'f'</td>
-<td></td>
-</tr>
 </table>
 
