@@ -64,7 +64,7 @@ static_assert(sizeof(short) == 2)
 <th colspan="2">Output</th>
 </tr>
 <tr>
-<td colspan="2">static assertion failure: sizeof(short) == 2</td>
+<td colspan="2" align="center">static assertion failure: sizeof(short) == 2</td>
 </tr>
 </table>
 
@@ -119,9 +119,11 @@ case bad:
 </tr>
 <tr>
 <th>Compiler</th>
+<th>Compiler</th>
 </tr>
 <tr>
-<th>static assertion failure: sizeof(short) == 2</th>
+<td>warning: case statement without break</td>
+<td></td>
 </tr>
 </table>
 
