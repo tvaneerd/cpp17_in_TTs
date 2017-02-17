@@ -228,3 +228,38 @@ C++17
 <td></td>
 </tr>
 </table>
+
+
+
+
+
+
+<table>
+<tr>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td  valign="top">
+<pre lang="cpp">
+   [[maybe_unused]] void f()
+   {
+      /*...*/
+   }
+   int main()
+   {
+   }
+</pre>
+</td>
+</tr>
+<tr>
+<th>Compiler</th>
+<th>C++17 Compiler</th>
+</tr>
+<tr>
+<td>warning: unused function 'f'</td>
+<td></td>
+</tr>
+</table>
+
