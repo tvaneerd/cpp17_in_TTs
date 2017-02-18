@@ -143,6 +143,41 @@ struct Foo {
 
 
 
+Guaranteed Copy Elision
+---
+
+
+<table>
+<tr>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td  valign="top">
+<pre lang="cpp">
+   vector&lt;string&gt; get_lots_of_strings()
+   {
+      vector&lt;string&gt; v;
+      unsigned long long i = 0;
+      while (more_internet())
+         v.push_back(string_from_internet(i++);
+      return v;
+   }
+   int main()
+   {
+      vector&lt;string&gt; internet;
+      internet = get_lots_of_strings();
+      for (auto s : internet)
+         cout &lt;&lt; s;
+   }
+</pre>
+</td>
+</tr>
+</table>
+
+
+
 
 
 
@@ -330,4 +365,6 @@ C++17
 </td>
 </tr>
 </table>
+
+
 
