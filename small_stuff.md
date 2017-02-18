@@ -92,7 +92,7 @@ C++17
 extern int foo;
 
 // foo.cpp
-extern int foo = 10;
+extern int foo = 14;
 </pre>
 </td>
 <td  valign="top">
@@ -124,7 +124,7 @@ struct Foo {
 };
 
 // foo.cpp
-int Foo::foo = 17;
+int Foo::foo = 14;
 </pre>
 </td>
 <td  valign="top">
@@ -137,6 +137,13 @@ struct Foo {
 </td>
 </tr>
 </table>
+
+
+
+
+
+
+
 
 
 some new [[attributes]]
