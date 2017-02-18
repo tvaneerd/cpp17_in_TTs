@@ -92,13 +92,13 @@ C++17
 extern int foo;
 
 // foo.cpp
-extern int foo = 14;
+extern int foo = 10;
 </pre>
 </td>
 <td  valign="top">
 <pre lang="cpp">
 // foo.h
-inline int foo = 17;
+inline int foo = 10;
 </pre>
 </td>
 </tr>
@@ -124,14 +124,14 @@ struct Foo {
 };
 
 // foo.cpp
-int Foo::foo = 14;
+int Foo::foo = 10;
 </pre>
 </td>
 <td  valign="top">
 <pre lang="cpp">
 // foo.h
 struct Foo {
-   static inline int foo = 17;
+   static inline int foo = 10;
 };
 </pre>
 </td>
