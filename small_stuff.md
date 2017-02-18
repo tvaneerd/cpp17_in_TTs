@@ -205,7 +205,7 @@ C++17
 <td  valign="top">
 <pre lang="cpp">
    bool res = step1();
-   assert(b);
+   assert(res);
    step2();
    etc();
 </pre>
@@ -213,7 +213,7 @@ C++17
 <td  valign="top">
 <pre lang="cpp">
    [[maybe_unused]] bool res = step1();
-   assert(b);
+   assert(res);
    step2();
    etc();
 </pre>
@@ -224,7 +224,7 @@ C++17
 <th>C++17 Compiler</th>
 </tr>
 <tr>
-<td>warning: unused variable 'b'</td>
+<td>warning: unused variable 'res'</td>
 <td></td>
 </tr>
 </table>
