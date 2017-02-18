@@ -70,6 +70,75 @@ static_assert(sizeof(short) == 2)
 
 
 
+
+
+inline Variables
+---
+
+
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td  valign="top">
+<pre lang="cpp">
+// foo.h
+extern int foo;
+
+// foo.cpp
+extern int foo = 10;
+</pre>
+</td>
+<td  valign="top">
+<pre lang="cpp">
+// foo.h
+inline int foo = 17;
+</pre>
+</td>
+</tr>
+</table>
+
+
+
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td  valign="top">
+<pre lang="cpp">
+// foo.h
+struct Foo {
+   static int foo;
+};
+
+// foo.cpp
+int Foo::foo = 17;
+</pre>
+</td>
+<td  valign="top">
+<pre lang="cpp">
+// foo.h
+struct Foo {
+   static inline int foo = 17;
+};
+</pre>
+</td>
+</tr>
+</table>
+
+
 some new [[attributes]]
 ---
 
