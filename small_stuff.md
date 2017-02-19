@@ -147,6 +147,7 @@ Guaranteed Copy Elision
 ---
 
 
+
 <table>
 <tr>
 <th>
@@ -156,26 +157,37 @@ C++17
 <tr>
 <td  valign="top">
 <pre lang="cpp">
-   vector&lt;string&gt; get_lots_of_strings()
+
+// header &lt;mutex&gt;
+namespace std
+{
+   template &lt;typename M&gt;
+   struct lock_guard
    {
-      vector&lt;string&gt; v;
-      unsigned long long i = 0;
-      while (more_internet())
-         v.push_back(string_from_internet(i++);
-      return v;
+      lock_guard(M &amp; mutex);
+      // not copyable, not movable:
+      lock_guard(lock_guard const &amp; ) = delete;
+      //...
    }
-   int main()
-   {
-      vector&lt;string&gt; internet;
-      internet = get_lots_of_strings();
-      for (auto s : internet)
-         cout &lt;&lt; s;
-   }
+}
+
+// your code
+lock_guard&lt;mutex&gt; grab_lock(mutex mtx)
+{
+   return lock_guard&lt;mutex&gt;(mtx);
+}
+
+mutex mtx;
+
+void foo()
+{
+   auto guard = grab_lock(mtx);
+   /* do stuff holding lock */
+}
 </pre>
 </td>
 </tr>
 </table>
-
 
 
 
