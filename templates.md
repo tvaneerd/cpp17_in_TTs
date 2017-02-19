@@ -1,4 +1,4 @@
-template<auto>
+template\<auto>
 ---
 
 <table>
