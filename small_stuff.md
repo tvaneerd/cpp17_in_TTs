@@ -172,7 +172,7 @@ namespace std
 }
 
 // your code
-lock_guard&lt;mutex&gt; grab_lock(mutex mtx)
+lock_guard&lt;mutex&gt; grab_lock(mutex &amp; mtx)
 {
    return lock_guard&lt;mutex&gt;(mtx);
 }
