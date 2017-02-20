@@ -87,6 +87,6 @@ std::cout &lt;&lt; oi.value_or(0);
 </table>
 
 
-Note, optional is **not just for errors**.
+Note, optional is **not just for errors**.  
 See also boost::optional, Haskell's Maybe, etc.
 
