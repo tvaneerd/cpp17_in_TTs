@@ -69,7 +69,7 @@ class MyString {
 </tr>
 </table>
 
-** Example 2 **
+**Example 2**
 
 Think of something like an XML parser, that is constantly returning `string` objects for the XML entities that it finds.
 Each of those strings is a potential allocation.
