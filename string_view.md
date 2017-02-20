@@ -9,7 +9,7 @@ Let's say I write some kind of parser:
 
 `Foo parseFoo(std::string const & input);`
 
-But then I have some users using `char *`, so I add (or change to) this interface:
+But then I have some users using `char *` - add creating a `string` just to pass to the parser, so I add (or change to) this interface:
 
 `Foo parseFoo(char const * str);`
 
@@ -71,9 +71,9 @@ class MyString {
 
 ** Example 2 **
 
-Think of something like an XML parser, that is constantly returning `string`s for the XML entities that it finds.
+Think of something like an XML parser, that is constantly returning `string` objects for the XML entities that it finds.
 Each of those strings is a potential allocation.
-So instead, return `string_view`s.
+So instead, return `string_view`.
 
 **Caveats**
 
