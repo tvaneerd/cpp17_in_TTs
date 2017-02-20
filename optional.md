@@ -33,7 +33,7 @@ Foo parseFoo(std::string_view in);
 Foo parseFoo(std::string_view in);
 
 // returns false on error
-bool parseFoo(std::string_view in, Foo & output);
+bool parseFoo(std::string_view in, Foo &amp; output);
 
 // returns null on error
 unique_ptr&lt;Foo&gt; parseFoo(std::string_view in);
