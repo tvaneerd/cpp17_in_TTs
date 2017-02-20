@@ -1,6 +1,10 @@
 std::string_view
 ---
 
+Standardization of existing practice.  See boost::string_ref, QStringRef, etc.
+
+---
+
 Let's say I write some kind of parser:
 
 `Foo parseFoo(std::string const & input);`
@@ -34,7 +38,11 @@ C++17
 <pre lang="cpp">
 Foo parseFoo(std::string const & input);
 Foo parseFoo(char const * str);
+
 Foo parseFoo(char const * str, int length);
+
+
+
 
 Foo parseFoo(MyString const & str);
 </pre>
@@ -43,7 +51,11 @@ Foo parseFoo(MyString const & str);
 <pre lang="cpp">
 Foo parseFoo(std::string_view input);
 
-
+// I would say don't offer this interface, but:
+Foo parseFoo(char const * str, int length)
+{
+   return parseFoo(string_view(str,length));
+}
 
 class MyString {
    //...
@@ -57,6 +69,11 @@ class MyString {
 </tr>
 </table>
 
+** Example 2 **
+
+Think of something like an XML parser, that is constantly returning `string`s for the XML entities that it finds.
+Each of those strings is a potential allocation.
+So instead, return `string_view`s.
 
 **Caveats**
 
