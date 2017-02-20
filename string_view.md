@@ -77,5 +77,5 @@ So instead, return `string_view`.
 
 **Caveats**
 
-`string_view` does NOT own the string memory.  It points to memory owned elsewhere, like a reference or a pointer or iterator, etc.
+`string_view` does NOT own the string memory.  It points to memory owned elsewhere, similar to how a reference or pointer or iterator works.
 It has _reference semantics_.
