@@ -69,3 +69,14 @@ std::transform(std::par_unseq, xfirst, xlast, yfirst,
 </tr>
 </table>
 
+
+Execution Policies
+---
+
+| | |
+---|---
+std::seq | indeterminately sequenced in the **calling thread**
+std::par | **multiple threads** - calls are indeterminately sequenced with respect to each other within the same thread
+std::par_unseq | **multiple threads and may be vectorized** - calls are unsequenced with respect to each other and possibly interleaved
+
+
