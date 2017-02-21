@@ -11,6 +11,7 @@ Also, we put them in `std::experimental`. It would be `std::ish` but I wasn't th
 The committee has a number of TSes on the go.  Although they are not part of C++17, you can use them NOW.
 
 **Concepts**
+---
 
 _The biggest addition to C++ since sliced bread_.
 
@@ -78,6 +79,7 @@ error: MyIter does not model RandomAccessIterator
 </table>
 
 **Modules**
+---
 
 _Encapsulation at the component level_
 (Precompiled headers on steroids. Don't tell Gaby I said that.)  
@@ -85,31 +87,41 @@ _Encapsulation at the component level_
 Available NOW in Visual Studio and clang.
 
 **Coroutines**
+---
 
 (a.k.a. Gor-routines.) Similar to `await` et al from C#, python, etc.  But, of course, better.
 
 Available NOW in Visual Studio.
 
 
-**Networking**
-
-_Boost ASIO._
-
 **Ranges**
+---
 
 _Nothing less than STL 2.0_  
 https://github.com/ericniebler/range-v3
 
+**Networking**
+---
+
+_Boost ASIO._
+
+
 
 **Transactional Memory**
+---
 
 **Parallelism 2**
+---
 
 **Library Fundamentals 2**
+---
 
 **Concurrency 2**
+---
 
 **Parallelism 2**
+---
 
 **2D Graphics**
+---
 
