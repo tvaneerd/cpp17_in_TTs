@@ -1,3 +1,6 @@
+if-init
+---
+
 <table>
 <tr>
 <th>
