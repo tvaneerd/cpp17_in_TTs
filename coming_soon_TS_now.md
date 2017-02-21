@@ -79,8 +79,8 @@ error: MyIter does not model RandomAccessIterator
 
 **Modules**
 
-Precompiled headers on steroids. (Don't tell Gaby I said that.)  
 _Encapsulation at the component level_
+(Precompiled headers on steroids. Don't tell Gaby I said that.)  
 
 Available NOW in Visual Studio and clang.
 
