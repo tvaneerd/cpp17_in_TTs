@@ -1,6 +1,9 @@
 # cpp17_in_TTs
 Descriptions of C++17 features, presented mostly in "Tony Tables" (hey, the name wasn't my idea)
 
+See the list of files in the repo - typically one file per feature (hopefully obvious via the file name).
+Or look at them all at once in [ALL_IN_ONE.md](ALL_IN_ONE.md)
+
 Some sources and/or places for good C++17 info:
 
 https://jfbastien.github.io/what-is-cpp17/#/  
