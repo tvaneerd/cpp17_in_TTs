@@ -142,6 +142,7 @@ C++17
       int x;
       string str;
    };
+   
    Foo stuff();
      
    auto [ i, s ] = stuff();
@@ -169,7 +170,6 @@ C++17
    public:
       template &lt;int N&gt; auto get() /*const?*/ { /*...*/ }
    };
-   Foo stuff();
    namespace std {
       template ... tuple_size ...
       template ... tuple_element ...
@@ -178,6 +178,8 @@ C++17
    template&lt;int N&gt; auto get(Foo /*const?*/ &amp; foo) { /*...*/ }
    //...
    
+   Foo stuff();
+
    auto [ i, s ] = stuff();
 
    use(s, ++i);
