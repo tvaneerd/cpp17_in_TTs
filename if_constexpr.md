@@ -23,8 +23,8 @@ class Foo {
   int myInt;
   string myString;
 public:
-  int const & refInt() { return myInt; }
-  string const & refString() { return myString; }
+  int const &amp; refInt() { return myInt; }
+  string const &amp; refString() { return myString; }
 };
 
 
@@ -35,11 +35,11 @@ template&lt;int N&gt; void get(Foo const &amp; foo)
   static_assert(false, "Foo only has 2 members");
 }
 // here's some specializations (the real stuff)
-template&lt;&gt; int const & get&lt;0&gt;(Foo const &amp; foo)
+template&lt;&gt; int const &amp; get&lt;0&gt;(Foo const &amp; foo)
 {
   return foo.refInt();
 }
-template&lt;&gt; string const & get&lt;1&gt;(Foo const &amp; foo)
+template&lt;&gt; string const &amp; get&lt;1&gt;(Foo const &amp; foo)
 {
   return foo.refString();
 }
@@ -51,20 +51,20 @@ class Foo {
   int myInt;
   string myString;
 public:
-  int const & refInt() { return myInt; }
-  string const & refString() { return myString; }
+  int const &amp; refInt() { return myInt; }
+  string const &amp; refString() { return myString; }
 };
 
 
 
 template&lt;int N&gt; auto get(Foo const &amp; foo)
 {
+  static_assert(0 &lt;= N &amp;&amp; N &lt; 2, "Foo only has 2 members");
+
   if constexpr (N == 0)  // !! LOOK HERE !!
      return foo.refInt();
   else if constexpr (N == 1)    // !! LOOK HERE !!
      return foo.refString();
-  else
-     static_assert(false, "Foo only has 2 members");
 }
 </pre>
 </td>
