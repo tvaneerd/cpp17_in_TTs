@@ -88,7 +88,7 @@ void handleData(string const &amp; s);
 
 //...
 
-std::visit(stuff.data,  [](auto const &amp; val) { handleData(val); } );
+std::visit([](auto const &amp; val) { handleData(val); }, stuff.data);
 
 // can also switch(stuff.data.index())
 
@@ -118,7 +118,7 @@ struct ThatLambda
 };
 
 ThatLambda thatLambda;
-std::visit(stuff.data, thatLambda);
+std::visit(thatLambda, stuff.data);
 
 </pre>
 </td>
