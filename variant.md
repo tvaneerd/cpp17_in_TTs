@@ -62,7 +62,7 @@ C++17
 <pre lang="cpp">
 void handleData(int i);
 void handleData(double d);
-void handleData(string const & s);
+void handleData(string const &amp; s);
 
 //...
 
@@ -84,11 +84,11 @@ case STRING:
 <pre lang="cpp">
 void handleData(int i);
 void handleData(double d);
-void handleData(string const & s);
+void handleData(string const &amp; s);
 
 //...
 
-std::visit(stuff.data,  [](auto val) { handleData(val); } );
+std::visit(stuff.data,  [](auto const &amp; val) { handleData(val); } );
 
 // can also switch(stuff.data.index())
 
@@ -112,9 +112,9 @@ How the above lambda works
 <pre lang="cpp">
 struct ThatLambda
 {
-   void operator()(int i) { handleData(i); }
-   void operator()(double d) { handleData(d); }
-   void operator()(string const & s) { handleData(s); }
+   void operator()(int const &amp; i) { handleData(i); }
+   void operator()(double const &amp; d) { handleData(d); }
+   void operator()(string const &amp; s) { handleData(s); }
 };
 
 ThatLambda thatLambda;
