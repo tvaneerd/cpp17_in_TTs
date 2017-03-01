@@ -56,10 +56,8 @@ How do you write `sum()` ?
 <tr>
 <td  valign="top">
 <pre lang="cpp">
-{
-   auto x = sum(5, 8);
-   auto y = sum(a, b, 17, 3.14, etc);
-}
+auto x = sum(5, 8);
+auto y = sum(a, b, 17, 3.14, etc);
 </pre>
 </td>
 </tr>
@@ -77,31 +75,29 @@ C++17
 <tr>
 <td  valign="top">
 <pre lang="cpp">
-{
-   auto sum() { return 0; }
-   
-   template <typename T>
-   auto sum(T&& t) { return t; }
-   
-   template <typename T, typename... Rest>
-   auto sum(T&& t, Rest&&... r) {
-      return t + sum(std::forward<Rest>(r)...);
-   }
+auto sum() { return 0; }
+
+template &lt;typename T&gt;
+auto sum(T&amp;&amp; t) { return t; }
+
+template &lt;typename T, typename... Rest&gt;
+auto sum(T&amp;&amp; t, Rest&amp;&amp;... r) {
+   return t + sum(std::forward&lt;Rest&gt;(r)...);
 }
 </pre>
 </td>
 <td  valign="top">
 <pre lang="cpp">
-{
 
 
 
 
 
-   template <typename... Args>
-   auto sum(Args&&... args) {
-      return (args + ... + 0);
-   }
+
+
+template &lt;typename... Args&gt;
+auto sum(Args&amp;&amp;... args) {
+   return (args + ... + 0);
 }
 </pre>
 </td>
