@@ -150,7 +150,9 @@ C++17
    
    Foo stuff();
      
+     
    auto [ i, s ] = stuff();
+
 
    use(s, ++i);
 </pre>
