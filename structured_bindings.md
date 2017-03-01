@@ -1,4 +1,4 @@
-Decomposition Declarations a.k.a Structured Bindings 
+Structured Bindings 
 -------------------
 
 <table>
@@ -67,7 +67,7 @@ compiler
    pair&lt;int, string&gt; stuff();
    
    
-   auto &amp; [ i, s ] = stuff();
+   auto [ i, s ] = stuff();
 
 
    use(s, ++i);
@@ -77,7 +77,7 @@ compiler
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
    
-   auto &amp; __tmp = stuff();
+   auto __tmp = stuff();
    auto &amp; i = get&lt;0&gt;(__tmp);
    auto &amp; s = get&lt;1&gt;(__tmp);
 
@@ -97,7 +97,7 @@ compiler
 C++17
 </th>
 <th>
-C++17
+compiler
 </th>
 </tr>
 <tr>
@@ -107,16 +107,18 @@ C++17
    
    auto const &amp; [ i, s ] = stuff();
 
-   use(s, ++i);
+   use(s, i);
 </pre>
 </td>
 <td valign="top">
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
    
-   auto &amp;&amp; [ i, s ] = stuff();
+   auto const &amp; __tmp = stuff();
+   auto &amp; i = get&lt;0&gt;(__tmp); // automatically const
+   auto &amp; s = get&lt;1&gt;(__tmp); // automatically const
 
-   use(s, ++i);
+   use(s, i);
 </pre>
 </td>
 </tr>
@@ -125,15 +127,16 @@ C++17
 
 Wait, pair and tuple are not magic(?), can *my* types work with this?
 
+**YES**.  The compiler uses `get<N>()` if available, or can work with plain structs directly:
 
-
-
+**Structs**
 
 <table>
 <tr>
 <th>
 C++17
 </th>
+<th>compiler</th>
 </tr>
 <tr>
 <td valign="top">
@@ -150,10 +153,26 @@ C++17
    use(s, ++i);
 </pre>
 </td>
-</tr>
+<td valign="top">
+<pre lang="cpp">
+   struct Foo {
+      int x;
+      string str;
+   };
+   
+   Foo stuff();
+   
+   Foo __tmp = stuff();
+   auto &amp; i = __tmp.x;
+   auto &amp; s = __tmp.str;
+
+   use(s, ++i);
+</pre>
+</td></tr>
 </table>
 
 
+**Implement your own get()**
 
 
 <table>
@@ -188,7 +207,7 @@ C++17
 </tr>
 </table>
 
-
+**Arrays, std::array, etc, oh my!**
 
 <table>
 <tr>
@@ -203,7 +222,6 @@ etc
    int arr[4] = { /*...*/ };
    auto [ a, b, c, d ] = arr; 
    auto [ t, u, v ] = std::array&lt;int,3&gt;();
-   auto [ x, y ] = { 1, 2 }; // ??
    
    // now we're talkin'
    for (auto &amp;&amp; [key, value] : my_map)
