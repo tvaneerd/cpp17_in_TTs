@@ -37,7 +37,7 @@ switch (device.status())
 {
 case sleep:
    device.wake();
-   [[fallthrough]]
+   [[fallthrough]];
 case ready:
    device.run();
    break;
