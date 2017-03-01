@@ -72,7 +72,7 @@ void copy_foobar() {
   copy += ".bak";
   fs::copy(p, copy);
   fs::path dir_copy = dir;
-  dir += ".bak";
+  dir_copy += ".bak";
   fs::copy(dir, dir_copy, fs::copy_options::recursive);
 }
 
