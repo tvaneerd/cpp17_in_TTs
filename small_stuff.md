@@ -72,7 +72,7 @@ static_assert(sizeof(short) == 2)
 
 
 
-inline Variables
+Inline Variables
 ---
 
 
@@ -164,7 +164,7 @@ namespace std
    template &lt;typename M&gt;
    struct lock_guard
    {
-      lock_guard(M &amp; mutex);
+      explicit lock_guard(M &amp; mutex);
       // not copyable, not movable:
       lock_guard(lock_guard const &amp; ) = delete;
       //...
