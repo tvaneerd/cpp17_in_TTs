@@ -105,7 +105,9 @@ compiler
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
    
+   
    auto const &amp; [ i, s ] = stuff();
+
 
    use(s, i);
 </pre>
