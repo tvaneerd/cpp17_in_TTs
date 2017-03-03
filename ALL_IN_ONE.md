@@ -107,7 +107,7 @@ C++17
 </tr>
 </table>
 
-Decomposition Declarations a.k.a Structured Bindings 
+Structured Bindings 
 -------------------
 
 <table>
@@ -176,7 +176,7 @@ compiler
    pair&lt;int, string&gt; stuff();
    
    
-   auto &amp; [ i, s ] = stuff();
+   auto [ i, s ] = stuff();
 
 
    use(s, ++i);
@@ -186,7 +186,7 @@ compiler
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
    
-   auto &amp; __tmp = stuff();
+   auto __tmp = stuff();
    auto &amp; i = get&lt;0&gt;(__tmp);
    auto &amp; s = get&lt;1&gt;(__tmp);
 
@@ -206,7 +206,7 @@ compiler
 C++17
 </th>
 <th>
-C++17
+compiler
 </th>
 </tr>
 <tr>
@@ -214,18 +214,22 @@ C++17
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
    
+   
    auto const &amp; [ i, s ] = stuff();
 
-   use(s, ++i);
+
+   use(s, i);
 </pre>
 </td>
 <td valign="top">
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
    
-   auto &amp;&amp; [ i, s ] = stuff();
+   auto const &amp; __tmp = stuff();
+   auto &amp; i = get&lt;0&gt;(__tmp); // automatically const
+   auto &amp; s = get&lt;1&gt;(__tmp); // automatically const
 
-   use(s, ++i);
+   use(s, i);
 </pre>
 </td>
 </tr>
@@ -234,15 +238,16 @@ C++17
 
 Wait, pair and tuple are not magic(?), can *my* types work with this?
 
+**YES**.  The compiler uses `get<N>()` if available, or can work with plain structs directly:
 
-
-
+**Structs**
 
 <table>
 <tr>
 <th>
 C++17
 </th>
+<th>compiler</th>
 </tr>
 <tr>
 <td valign="top">
@@ -251,17 +256,36 @@ C++17
       int x;
       string str;
    };
+   
    Foo stuff();
      
+     
    auto [ i, s ] = stuff();
+
 
    use(s, ++i);
 </pre>
 </td>
-</tr>
+<td valign="top">
+<pre lang="cpp">
+   struct Foo {
+      int x;
+      string str;
+   };
+   
+   Foo stuff();
+   
+   Foo __tmp = stuff();
+   auto &amp; i = __tmp.x;
+   auto &amp; s = __tmp.str;
+
+   use(s, ++i);
+</pre>
+</td></tr>
 </table>
 
 
+**Implement your own get()**
 
 
 <table>
@@ -278,7 +302,6 @@ C++17
    public:
       template &lt;int N&gt; auto get() /*const?*/ { /*...*/ }
    };
-   Foo stuff();
    namespace std {
       template ... tuple_size ...
       template ... tuple_element ...
@@ -287,6 +310,8 @@ C++17
    template&lt;int N&gt; auto get(Foo /*const?*/ &amp; foo) { /*...*/ }
    //...
    
+   Foo stuff();
+
    auto [ i, s ] = stuff();
 
    use(s, ++i);
@@ -295,7 +320,7 @@ C++17
 </tr>
 </table>
 
-
+**Arrays, std::array, etc, oh my!**
 
 <table>
 <tr>
@@ -310,7 +335,6 @@ etc
    int arr[4] = { /*...*/ };
    auto [ a, b, c, d ] = arr; 
    auto [ t, u, v ] = std::array&lt;int,3&gt;();
-   auto [ x, y ] = { 1, 2 }; // ??
    
    // now we're talkin'
    for (auto &amp;&amp; [key, value] : my_map)
@@ -346,8 +370,8 @@ class Foo {
   int myInt;
   string myString;
 public:
-  int const & refInt() { return myInt; }
-  string const & refString() { return myString; }
+  int const &amp; refInt() { return myInt; }
+  string const &amp; refString() { return myString; }
 };
 
 
@@ -358,11 +382,11 @@ template&lt;int N&gt; void get(Foo const &amp; foo)
   static_assert(false, "Foo only has 2 members");
 }
 // here's some specializations (the real stuff)
-template&lt;&gt; int const & get&lt;0&gt;(Foo const &amp; foo)
+template&lt;&gt; int const &amp; get&lt;0&gt;(Foo const &amp; foo)
 {
   return foo.refInt();
 }
-template&lt;&gt; string const & get&lt;1&gt;(Foo const &amp; foo)
+template&lt;&gt; string const &amp; get&lt;1&gt;(Foo const &amp; foo)
 {
   return foo.refString();
 }
@@ -374,20 +398,20 @@ class Foo {
   int myInt;
   string myString;
 public:
-  int const & refInt() { return myInt; }
-  string const & refString() { return myString; }
+  int const &amp; refInt() { return myInt; }
+  string const &amp; refString() { return myString; }
 };
 
 
 
-template&lt;int N&gt; auto get(Foo const &amp; foo)
+template&lt;int N&gt; auto &amp; get(Foo const &amp; foo)
 {
+  static_assert(0 &lt;= N &amp;&amp; N &lt; 2, "Foo only has 2 members");
+
   if constexpr (N == 0)  // !! LOOK HERE !!
      return foo.refInt();
   else if constexpr (N == 1)    // !! LOOK HERE !!
      return foo.refString();
-  else
-     static_assert(false, "Foo only has 2 members");
 }
 </pre>
 </td>
@@ -516,10 +540,8 @@ How do you write `sum()` ?
 <tr>
 <td  valign="top">
 <pre lang="cpp">
-{
-   auto x = sum(5, 8);
-   auto y = sum(a, b, 17, 3.14, etc);
-}
+auto x = sum(5, 8);
+auto y = sum(a, b, 17, 3.14, etc);
 </pre>
 </td>
 </tr>
@@ -537,31 +559,29 @@ C++17
 <tr>
 <td  valign="top">
 <pre lang="cpp">
-{
-   auto sum() { return 0; }
-   
-   template <typename T>
-   auto sum(T&& t) { return t; }
-   
-   template <typename T, typename... Rest>
-   auto sum(T&& t, Rest&&... r) {
-      return t + sum(std::forward<Rest>(r)...);
-   }
+auto sum() { return 0; }
+
+template &lt;typename T&gt;
+auto sum(T&amp;&amp; t) { return t; }
+
+template &lt;typename T, typename... Rest&gt;
+auto sum(T&amp;&amp; t, Rest&amp;&amp;... r) {
+   return t + sum(std::forward&lt;Rest&gt;(r)...);
 }
 </pre>
 </td>
 <td  valign="top">
 <pre lang="cpp">
-{
 
 
 
 
 
-   template <typename... Args>
-   auto sum(Args&&... args) {
-      return (args + ... + 0);
-   }
+
+
+template &lt;typename... Args&gt;
+auto sum(Args&amp;&amp;... args) {
+   return (args + ... + 0);
 }
 </pre>
 </td>
@@ -641,7 +661,7 @@ static_assert(sizeof(short) == 2)
 
 
 
-inline Variables
+Inline Variables
 ---
 
 
@@ -733,7 +753,7 @@ namespace std
    template &lt;typename M&gt;
    struct lock_guard
    {
-      lock_guard(M &amp; mutex);
+      explicit lock_guard(M &amp; mutex);
       // not copyable, not movable:
       lock_guard(lock_guard const &amp; ) = delete;
       //...
@@ -801,7 +821,7 @@ switch (device.status())
 {
 case sleep:
    device.wake();
-   [[fallthrough]]
+   [[fallthrough]];
 case ready:
    device.run();
    break;
@@ -1186,7 +1206,7 @@ C++17
 <pre lang="cpp">
 void handleData(int i);
 void handleData(double d);
-void handleData(string const & s);
+void handleData(string const &amp; s);
 
 //...
 
@@ -1208,11 +1228,11 @@ case STRING:
 <pre lang="cpp">
 void handleData(int i);
 void handleData(double d);
-void handleData(string const & s);
+void handleData(string const &amp; s);
 
 //...
 
-std::visit(stuff.data,  [](auto val) { handleData(val); } );
+std::visit([](auto const &amp; val) { handleData(val); }, stuff.data);
 
 // can also switch(stuff.data.index())
 
@@ -1236,13 +1256,13 @@ How the above lambda works
 <pre lang="cpp">
 struct ThatLambda
 {
-   void operator()(int i) { handleData(i); }
-   void operator()(double d) { handleData(d); }
-   void operator()(string const & s) { handleData(s); }
+   void operator()(int const &amp; i) { handleData(i); }
+   void operator()(double const &amp; d) { handleData(d); }
+   void operator()(string const &amp; s) { handleData(s); }
 };
 
 ThatLambda thatLambda;
-std::visit(stuff.data, thatLambda);
+std::visit(thatLambda, stuff.data);
 
 </pre>
 </td>
@@ -1461,7 +1481,8 @@ void copy_foobar() {
   fs::path copy = p;
   copy += ".bak";
   fs::copy(p, copy);
-  fs::path dir_copy = dir + ".bak";
+  fs::path dir_copy = dir;
+  dir_copy += ".bak";
   fs::copy(dir, dir_copy, fs::copy_options::recursive);
 }
 
