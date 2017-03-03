@@ -57,7 +57,7 @@ public:
 
 
 
-template&lt;int N&gt; auto get(Foo const &amp; foo)
+template&lt;int N&gt; auto &amp; get(Foo const &amp; foo)
 {
   static_assert(0 &lt;= N &amp;&amp; N &lt; 2, "Foo only has 2 members");
 
