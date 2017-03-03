@@ -92,7 +92,7 @@ C++17
 extern int foo;
 
 // foo.cpp
-extern int foo = 10;
+int foo = 10;
 </pre>
 </td>
 <td  valign="top">
