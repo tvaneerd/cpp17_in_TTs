@@ -146,9 +146,7 @@ MyError divide(int a, int b) {
   return {};
 }
 
-auto main() -> int { 
-  divide(1, 2);
-}
+divide(1, 2);
 </pre>
 </td>
 <td  valign="top">
@@ -168,9 +166,7 @@ MyError divide(int a, int b) {
   return {};
 }
 
-auto main() -> int { 
-  divide(1, 2);
-}
+divide(1, 2);
 </pre>
 </td>
 </tr>
