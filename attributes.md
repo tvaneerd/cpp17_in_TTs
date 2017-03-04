@@ -180,6 +180,8 @@ divide(1, 2);
 </tr>
 </table>
 
+Advice: use `[[nodiscard]]` **sparingly**. ie only when there really is _no_ reason to ignore the value.
+
 **[[maybe_unused]]**
 
 
