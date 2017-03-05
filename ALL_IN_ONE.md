@@ -681,7 +681,7 @@ C++17
 extern int foo;
 
 // foo.cpp
-extern int foo = 10;
+int foo = 10;
 </pre>
 </td>
 <td  valign="top">
@@ -844,6 +844,7 @@ case bad:
 
 **[[nodiscard]]**
 
+On functions:
 <table>
 <tr>
 <th>
@@ -900,6 +901,70 @@ void random_fill(SomeInts &amp; container,
 <td>warning: ignoring return value of 'bool empty()'</td>
 </tr>
 </table>
+
+On classes or structs:
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td  valign="top">
+<pre lang="cpp">
+struct MyError {
+  std::string message;
+  int code;
+};
+
+MyError divide(int a, int b) {
+  if (b == 0) {
+    return {"Division by zero", -1};
+  }
+
+  std::cout << (a / b) << '\n';
+
+  return {};
+}
+
+divide(1, 2);
+</pre>
+</td>
+<td  valign="top">
+<pre lang="cpp">
+struct [[nodiscard]] MyError {
+  std::string message;
+  int code;
+};
+
+MyError divide(int a, int b) {
+  if (b == 0) {
+    return {"Division by zero", -1};
+  }
+
+  std::cout << (a / b) << '\n';
+
+  return {};
+}
+
+divide(1, 2);
+</pre>
+</td>
+</tr>
+<tr>
+<th>Compiler</th>
+<th>C++17 Compiler</th>
+</tr>
+<tr>
+<td></td>
+<td>warning: ignoring return value of function declared with 'nodiscard' attribute</td>
+</tr>
+</table>
+
+Advice: use `[[nodiscard]]` **sparingly**. ie only when there really is _no_ reason to ignore the value.
 
 **[[maybe_unused]]**
 
