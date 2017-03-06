@@ -513,7 +513,7 @@ struct integral_constant
 {
    static constexpr auto value = v;
 };
-intergral_constant&lt;2048&gt;::value
+integral_constant&lt;2048&gt;::value
 integral_constant&lt;'a'&gt;::value
 </pre>
 </td>
