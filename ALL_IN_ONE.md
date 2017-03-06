@@ -113,7 +113,7 @@ Structured Bindings
 <table>
 <tr>
 <th>
-C++14
+C++11
 </th>
 <th>
 C++14
@@ -187,6 +187,94 @@ compiler
    pair&lt;int, string&gt; stuff();
    
    auto __tmp = stuff();
+   auto i = get&lt;0&gt;(__tmp);
+   auto s = get&lt;1&gt;(__tmp);
+
+   use(s, ++i);
+</pre>
+</td>
+</tr>
+</table>
+
+Get reference for the item in the tuple
+
+<table>
+<tr>
+<th>
+C++11
+</th>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td  valign="top">
+<pre lang="cpp">
+   tuple&lt;int, string&gt; stuff();
+   
+   auto tup = stuff();
+   int &amp; i = get&lt;0&gt;(tup);
+   string &amp; s = get&lt;1&gt;(tup);
+  
+   use(s, ++i);
+</pre>
+</td>
+<td  valign="top">
+<pre lang="cpp">
+   tuple&lt;int, string&gt; stuff();
+   
+   // syntax error
+   // reference without initialising
+   int &amp; i;
+   string s;
+   std::tie(i,s) = stuff();
+
+   use(s, ++i);
+</pre>
+</td>
+<td valign="top">
+<pre lang="cpp">
+   tuple&lt;int, string&gt; stuff();
+   
+   
+   auto &amp; [ i, s ] = stuff();
+
+
+   use(s, ++i);
+</pre>
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<th>
+C++17
+</th>
+<th>
+compiler
+</th>
+</tr>
+<tr>
+<td valign="top">
+<pre lang="cpp">
+   pair&lt;int, string&gt; stuff();
+   
+   
+   auto &amp; [ i, s ] = stuff();
+
+
+   use(s, ++i);
+</pre>
+</td>
+<td valign="top">
+<pre lang="cpp">
+   pair&lt;int, string&gt; stuff();
+   
+   auto __tmp = stuff();
    auto &amp; i = get&lt;0&gt;(__tmp);
    auto &amp; s = get&lt;1&gt;(__tmp);
 
@@ -195,10 +283,6 @@ compiler
 </td>
 </tr>
 </table>
-
-
-
-
 
 <table>
 <tr>
@@ -345,6 +429,7 @@ etc
 </td>
 </tr>
 </table>
+
 Constexpr If
 ------------
 
