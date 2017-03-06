@@ -1,5 +1,7 @@
-Speaking of pair and tuple...
+Deduction Guides
 ---
+
+Speaking of pair and tuple...
 
 <table>
 <tr>
