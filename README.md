@@ -1,5 +1,7 @@
 # cpp17_in_TTs
-Descriptions of C++17 features, presented mostly in "Tony Tables" (hey, the name wasn't my idea)
+Descriptions of C++17 features, presented mostly in "Tony Tables" (hey, the tables were my idea, but name wasn't).
+
+There are actually over 100 changes in C++17, only some of them are listed here.
 
 See the list of files in the repo - typically one file per feature (hopefully obvious via the file name).
 Or look at them all at once in [ALL_IN_ONE.md](ALL_IN_ONE.md) (which is regenerated semi-regularly)
