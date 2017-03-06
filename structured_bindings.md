@@ -78,8 +78,8 @@ compiler
    pair&lt;int, string&gt; stuff();
    
    auto __tmp = stuff();
-   auto &amp; i = get&lt;0&gt;(__tmp);
-   auto &amp; s = get&lt;1&gt;(__tmp);
+   auto i = get&lt;0&gt;(__tmp);
+   auto s = get&lt;1&gt;(__tmp);
 
    use(s, ++i);
 </pre>
