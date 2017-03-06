@@ -502,7 +502,7 @@ struct integral_constant
 {
    static constexpr T value = v;
 };
-intergral_constant&lt;int, 2048&gt;::value
+integral_constant&lt;int, 2048&gt;::value
 integral_constant&lt;char, 'a'&gt;::value
 </pre>
 </td>
