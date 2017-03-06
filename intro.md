@@ -3,8 +3,8 @@ Descriptions of C++17 features, presented mostly in "Tony Tables" (hey, the tabl
 
 There are actually *over 100 changes in C++17*, only some of them are listed here.
 
-Caveat1: *C++17 is completed, but not signed off yet. One or more of these features may be changed or removed.*  
-Caveat2: *I make mistakes.*  And it is hard to keep track of the specifics of every new feature.
+Caveat1: *C++17 is completed, but not signed off yet.* One or more of these features may be changed or removed, although _highly_ unlikely.  
+Caveat2: *I make mistakes.*  This is more likely :-)
 
 Created with the support from my employer, [Christie Digital Systems](https://www.christiedigital.com/en-us/business/solutions/projection-mapping).
 
