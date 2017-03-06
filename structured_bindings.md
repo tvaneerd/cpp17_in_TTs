@@ -117,7 +117,8 @@ C++17
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
    
-   int &amp; i; // syntax error - can't declare a reference without initialising it
+   //syntax error - reference without initialising
+   int &amp; i;
    string s;
    std::tie(i,s) = stuff();
 
