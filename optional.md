@@ -7,10 +7,10 @@ So, we have
 
 What if the parse fails?  And you can't parse out a Foo?
 
+0. throw an exception
 1. return default Foo. ie `Foo()` (if Foo is default constructible)
-2. throw an exception
-3. `bool parseFoo(std::string_view input, Foo & output);`  // also basically requires `Foo()`
-4. `Foo * parseFoo(std::string_view input);`  // allocation!? :-(
+2. `bool parseFoo(std::string_view input, Foo & output);`  // also basically requires `Foo()`
+3. `Foo * parseFoo(std::string_view input);`  // allocation!? :-(
 
 
 
@@ -87,6 +87,6 @@ std::cout &lt;&lt; oi.value_or(0);
 </table>
 
 
-Note, optional is **not just for errors**.  
+Note, optional is **not just for errors**, and exceptions are still the go-to choice for error handling.  
 See also boost::optional, Haskell's Maybe, etc.
 
