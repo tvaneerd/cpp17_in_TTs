@@ -1,3 +1,14 @@
+
+Descriptions of C++17 features, presented mostly in "Tony Tables" (hey, the tables were my idea, but their name wasn't :-).
+
+There are actually **over 100 changes in C++17**, only some of them are listed here.
+
+Caveat1: *C++17 is completed, but not signed off yet.* There may still be changes, although _highly_ unlikely (modulo defects).  
+Caveat2: *I make mistakes.*  This is more likely :-)
+
+Created with the support from my employer, [Christie Digital Systems](https://www.christiedigital.com/en-us/business/solutions/projection-mapping).
+
+---
 if-init
 ---
 
@@ -197,7 +208,69 @@ compiler
 </table>
 
 
+Note, in the above, `__tmp` is a copy, but `i` and `s` are references. Or I should say "references" in quotes. Not exactly references, but real compiler synonyms for the members. (They are not real references as things like `decltype` "look through" the references to the actual members.)
 
+So even though `auto [i,s] = stuff();` has no `&` anywhere, there are still references involved.  For example:
+
+<table>
+<tr>
+<th>
+C++17
+</th>
+<th>
+compiler
+</th>
+</tr>
+<tr>
+<td valign="top">
+<pre lang="cpp">
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+struct Foo
+{
+   int x = 0;
+   std::string str = "world";
+   ~Foo() { std::cout &lt;&lt; s; }
+};
+
+int main()
+{
+    auto [ i, s ] = Foo();
+    std::cout &lt;&lt; "hello ";
+    s = "structured bindings";
+}
+</pre>
+</td>
+<td valign="top">
+<pre lang="cpp">
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+struct Foo
+{
+   int x = 0;
+   std::string str = "world";
+   ~Foo() { std::cout &lt;&lt; s; }
+};
+
+int main()
+{
+    auto __tmp = Foo();
+    std::cout &lt;&lt; "hello ";
+    __tmp.str = "structured bindings";
+}
+</pre>
+</td>
+</tr>
+<th colspan="2">Output</th>
+<tr><td colspan="2" align="center">hello structued bindings</td></tr>
+</table>
+
+Note that the `s = "structured bindings";` is modifying `Foo::str` _inside_ of the temporary (hidden) `Foo`, so that when the temporary `Foo` is destroyed, its destructor prints `structured bindings` instead of `world`.
+
+So what _does_ a `&` do in a structured binding declaration?  
+It gets applied to the hidden `__tmp` variable:
 
 
 <table>
@@ -212,31 +285,47 @@ compiler
 <tr>
 <td valign="top">
 <pre lang="cpp">
-   pair&lt;int, string&gt; stuff();
+   struct X { int i = 0; };
+   X makeX();
    
+   X x;
    
-   auto const &amp; [ i, s ] = stuff();
-
-
-   use(s, i);
+   auto [ b ] = makeX();
+   b++;
+   auto const [ c ] = makeX();
+   c++;
+   auto &amp; [ d ] = makeX();
+   d++;
+   auto &amp; [ e ] = x;
+   e++;
+   auto const &amp; [ f ] = makeX();
+   f++;
 </pre>
 </td>
 <td valign="top">
 <pre lang="cpp">
-   pair&lt;int, string&gt; stuff();
+   struct X { int i = 0; };
+   X makeX();
    
-   auto const &amp; __tmp = stuff();
-   auto &amp; i = get&lt;0&gt;(__tmp); // automatically const
-   auto &amp; s = get&lt;1&gt;(__tmp); // automatically const
-
-   use(s, i);
+   X x;
+   
+   auto __tmp1 = makeX();
+   __tmp1.i++;
+   auto const __tmp2 = makeX();
+   __tmp2.i++; //error: can't modify const
+   auto &amp; __tmp3 = makeX(); //error: non-const ref cannot bind to temp
+   
+   auto &amp; _tmp3 = x;
+   x.i++;
+   auto const &amp; _tmp4 = makeX();
+   __tmp4.i++; //error: can't modify const
 </pre>
 </td>
 </tr>
 </table>
 
 
-Wait, pair and tuple are not magic(?), can *my* types work with this?
+Wait, pair and tuple are not magic (just nearly impossible to write to STL level), can *my* types work with this?
 
 **YES**.  The compiler uses `get<N>()` if available, or can work with plain structs directly:
 
@@ -420,8 +509,10 @@ template&lt;int N&gt; auto &amp; get(Foo const &amp; foo)
 
 
 P.S. `if constexpr (expression)` doesn't _check_ if the expression is constexpr.  The expression _must_ be constexpr (else it doesn't compile).  The part that is constexpr is 'doing' the if.  Don't think about this and what syntax might be better.  The committee argued about it long enough.
-Speaking of pair and tuple...
+Deduction Guides
 ---
+
+Speaking of pair and tuple...
 
 <table>
 <tr>
@@ -1045,7 +1136,7 @@ Let's say I write some kind of parser:
 
 `Foo parseFoo(std::string const & input);`
 
-But then I have some users using `char *` - add creating a `string` just to pass to the parser, so I add (or change to) this interface:
+But then I have some users using `char *` - and creating a `string` just to pass to the parser, so I add (or change to) this interface:
 
 `Foo parseFoo(char const * str);`
 
@@ -1072,7 +1163,7 @@ C++17
 <tr>
 <td  valign="top">
 <pre lang="cpp">
-Foo parseFoo(std::string const & input);
+Foo parseFoo(std::string const &amp; input);
 Foo parseFoo(char const * str);
 
 Foo parseFoo(char const * str, int length);
@@ -1080,7 +1171,7 @@ Foo parseFoo(char const * str, int length);
 
 
 
-Foo parseFoo(MyString const & str);
+Foo parseFoo(MyString const &amp; str);
 </pre>
 </td>
 <td  valign="top">
@@ -1124,10 +1215,10 @@ So, we have
 
 What if the parse fails?  And you can't parse out a Foo?
 
+0. throw an exception
 1. return default Foo. ie `Foo()` (if Foo is default constructible)
-2. throw an exception
-3. `bool parseFoo(std::string_view input, Foo & output);`  // also basically requires `Foo()`
-4. `Foo * parseFoo(std::string_view input);`  // allocation!? :-(
+2. `bool parseFoo(std::string_view input, Foo & output);`  // also basically requires `Foo()`
+3. `Foo * parseFoo(std::string_view input);`  // allocation!? :-(
 
 
 
@@ -1204,7 +1295,7 @@ std::cout &lt;&lt; oi.value_or(0);
 </table>
 
 
-Note, optional is **not just for errors**.  
+Note, optional is **not just for errors**, and exceptions are still the go-to choice for error handling.  
 See also boost::optional, Haskell's Maybe, etc.
 
 std::variant<A,B,C,...>
@@ -1712,7 +1803,7 @@ Also, we put them in `std::experimental`. It would be `std::ish` but I wasn't th
 
 The committee has a number of TSes on the go.  Although they are not part of C++17, you can use them NOW.
 
-**Concepts**
+**Concepts TS**
 ---
 
 _The biggest addition to C++ since sliced bread_.
@@ -1780,15 +1871,15 @@ error: MyIter does not model RandomAccessIterator
 </tr>
 </table>
 
-**Modules**
+**Modules TS**
 ---
 
-_Encapsulation at the component level_
+_Encapsulation at the component level_  
 (Precompiled headers on steroids. Don't tell Gaby I said that.)  
 
 Available NOW in Visual Studio and clang.
 
-**Coroutines**
+**Coroutines TS**
 ---
 
 (a.k.a. Gor-routines.) Similar to `await` et al from C#, python, etc.  But, of course, better.
@@ -1796,34 +1887,42 @@ Available NOW in Visual Studio and clang.
 Available NOW in Visual Studio.
 
 
-**Ranges**
+**Ranges TS**
 ---
 
 _Nothing less than STL 2.0_  
 https://github.com/ericniebler/range-v3
 
-**Networking**
+**Networking TS**
 ---
 
 _Boost ASIO._
 
 
 
-**Transactional Memory**
+**Transactional Memory TS**
 ---
 
-**Parallelism 2**
+**Parallelism 2 TS**
 ---
 
-**Library Fundamentals 2**
+**Concurrency 2 TS**
 ---
 
-**Concurrency 2**
+**Library Fundamentals 2 TS**
 ---
 
-**Parallelism 2**
+**2D Graphics TS**
 ---
 
-**2D Graphics**
+
 ---
 
+Some sources I used, and/or places for good C++17 info:
+
+https://jfbastien.github.io/what-is-cpp17/#/  
+https://skebanga.github.io/structured-bindings/  
+http://www.bfilipek.com/2017/01/cpp17features.html  
+http://en.cppreference.com  
+http://stackoverflow.com  
+Bryce Adelstein Lelbach's talk
