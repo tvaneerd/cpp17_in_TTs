@@ -9,7 +9,7 @@ Let's say I write some kind of parser:
 
 `Foo parseFoo(std::string const & input);`
 
-But then I have some users using `char *` - add creating a `string` just to pass to the parser, so I add (or change to) this interface:
+But then I have some users using `char *` - and creating a `string` just to pass to the parser, so I add (or change to) this interface:
 
 `Foo parseFoo(char const * str);`
 
@@ -36,7 +36,7 @@ C++17
 <tr>
 <td  valign="top">
 <pre lang="cpp">
-Foo parseFoo(std::string const & input);
+Foo parseFoo(std::string const &amp; input);
 Foo parseFoo(char const * str);
 
 Foo parseFoo(char const * str, int length);
@@ -44,7 +44,7 @@ Foo parseFoo(char const * str, int length);
 
 
 
-Foo parseFoo(MyString const & str);
+Foo parseFoo(MyString const &amp; str);
 </pre>
 </td>
 <td  valign="top">
