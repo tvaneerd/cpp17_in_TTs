@@ -1,0 +1,11 @@
+
+Descriptions of C++17 features, presented mostly in "Tony Tables" (hey, the tables were my idea, but their name wasn't :-).
+
+There are actually *over 100 changes* in C++17, only some of them are listed here.
+
+Caveat1: *C++17 is completed, but not signed off yet. One or more of these features may be changed or removed.*  
+Caveat2: *I make mistakes.*  And it is hard to keep track of the specifics of every new feature.
+
+Created with the support from my employer, [Christie Digital Systems](http://christiedigital.com).
+
+---
