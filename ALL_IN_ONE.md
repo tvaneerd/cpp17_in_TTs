@@ -264,7 +264,7 @@ int main()
 </td>
 </tr>
 <th colspan="2">Output</th>
-<tr><td colspan="2" align="center">hello structued bindings</td></tr>
+<tr><td colspan="2" align="center">hello structured bindings</td></tr>
 </table>
 
 Note that the `s = "structured bindings";` is modifying `Foo::str` _inside_ of the temporary (hidden) `Foo`, so that when the temporary `Foo` is destroyed, its destructor prints `structured bindings` instead of `world`.
