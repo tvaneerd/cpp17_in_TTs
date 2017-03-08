@@ -123,10 +123,7 @@ Structured Bindings
 
 <table>
 <tr>
-<th>
-C++14
-</th>
-<th>
+<th colspan="2">
 C++14
 </th>
 <th>
