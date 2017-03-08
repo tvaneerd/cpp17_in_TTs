@@ -108,7 +108,7 @@ struct Foo
 {
    int x = 0;
    std::string str = "world";
-   ~Foo() { std::cout &lt;&lt; s; }
+   ~Foo() { std::cout &lt;&lt; str; }
 };
 
 int main()
@@ -128,7 +128,7 @@ struct Foo
 {
    int x = 0;
    std::string str = "world";
-   ~Foo() { std::cout &lt;&lt; s; }
+   ~Foo() { std::cout &lt;&lt; str; }
 };
 
 int main()
