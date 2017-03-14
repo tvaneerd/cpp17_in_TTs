@@ -70,8 +70,8 @@ std::transform(std::par_unseq, xfirst, xlast, yfirst,
 </table>
 
 
-Execution Policies
----
+#### Execution Policies
+
 
 | | |
 ---|---
