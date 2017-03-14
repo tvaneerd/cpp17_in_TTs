@@ -34,8 +34,7 @@ auto is4 = pair(17, "hello"s);
 
 The magic behind the above is called "deduction guides".  In particular, _implicit_ deduction guides, and _explicit_ deduction guides.
 
-Explicit Deduction Guides
----
+#### Explicit Deduction Guides
 
 
 <pre lang=cpp>
@@ -53,8 +52,7 @@ Thingy thing{"A String"}; // thing.t is a `std::string`.
 _(example from Nicol Bolas)_
 
 
-Implicit Deduction Guides
----
+#### Implicit Deduction Guides
 
 For any `template<typename T, typename U, etc> struct`... (or class!)
 if there is a constructor that takes `T` and `U` such that it can figure out all the types,
