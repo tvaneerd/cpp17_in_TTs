@@ -60,8 +60,8 @@ std::transform(xfirst, xlast, yfirst,
 std::for_each(std::par, first, last,
     [](auto &amp; x){ process(x); }
 );
-std::copy(std::par, first, last, output);
-std::sort(std::par, first, last);
+std::copy(std::execution::par, first, last, output);
+std::sort(std::execution::par, first, last);
 std::transform(std::execution::par_unseq, xfirst, xlast, yfirst,
     [=](double xi, double yi){ return a * xi + yi; }
 );</pre>
