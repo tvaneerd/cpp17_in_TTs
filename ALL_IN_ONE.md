@@ -1754,7 +1754,7 @@ C++17
 <td  valign="top">
 <pre lang="cpp">
 std::for_each(first, last,
-    [](auto& x){ process(x); }
+    [](auto &amp; x){ process(x); }
 );
 std::copy(first, last, output);
 std::sort(first, last);
@@ -1766,11 +1766,11 @@ std::transform(xfirst, xlast, yfirst,
 <td  valign="top">
 <pre lang="cpp">
 std::for_each(std::par, first, last,
-    [](auto& x){ process(x); }
+    [](auto &amp; x){ process(x); }
 );
-std::copy(std::par, first, last, output);
-std::sort(std::par, first, last);
-std::transform(std::par_unseq, xfirst, xlast, yfirst,
+std::copy(std::execution::par, first, last, output);
+std::sort(std::execution::par, first, last);
+std::transform(std::execution::par_unseq, xfirst, xlast, yfirst,
     [=](double xi, double yi){ return a * xi + yi; }
 );</pre>
 </td>
@@ -1783,9 +1783,9 @@ std::transform(std::par_unseq, xfirst, xlast, yfirst,
 
 | | |
 ---|---
-std::seq | indeterminately sequenced in the **calling thread**
-std::par | **multiple threads** - calls are indeterminately sequenced with respect to each other within the same thread
-std::par_unseq | **multiple threads and may be vectorized** - calls are unsequenced with respect to each other and possibly interleaved
+std::execution::seq | indeterminately sequenced in the **calling thread**
+std::execution::par | **multiple threads** - calls are indeterminately sequenced with respect to each other within the same thread
+std::execution::par_unseq | **multiple threads and may be vectorized** - calls are unsequenced with respect to each other and possibly interleaved
 
 
 Technical Specifications (TS)
