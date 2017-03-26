@@ -37,7 +37,7 @@ C++17
 // or, most likely, terrible compiler errors
 //
 template &lt;typename T&gt;
-auto binary_search(T first, T second)
+auto binarySearch(T first, T second)
 {
    //...
 }
@@ -53,7 +53,7 @@ auto binary_search(T first, T second)
 
 
 template &lt;RandomAccessIterator T&gt;
-auto binary_search(T first, T second)
+auto binarySearch(T first, T second)
 {
    //...
 }
