@@ -81,11 +81,11 @@ C++17
 <td  valign="top">
 <pre lang="cpp">
 {
-   
-   
+   &nbsp;
+   &nbsp;
    if (QVariant var = getAnswer(); var.isValid())
       use(var);
-      
+   &nbsp;
    more_code();
 }
 </pre>
@@ -134,33 +134,33 @@ C++17
 <td  valign="top">
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
-   
+&nbsp;
    auto tup = stuff();
    int i = get&lt;0&gt;(tup);
    string s = get&lt;1&gt;(tup);
-  
+&nbsp;
    use(s, ++i);
 </pre>
 </td>
 <td  valign="top">
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
-   
+&nbsp;   
    int i;
    string s;
    std::tie(i,s) = stuff();
-
+&nbsp;
    use(s, ++i);
 </pre>
 </td>
 <td valign="top">
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
-   
-   
+&nbsp;   
+&nbsp;   
    auto [ i, s ] = stuff();
-
-
+&nbsp;
+&nbsp;
    use(s, ++i);
 </pre>
 </td>
@@ -182,22 +182,22 @@ compiler
 <td valign="top">
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
-   
-   
+&nbsp;   
+&nbsp;   
    auto [ i, s ] = stuff();
-
-
+&nbsp;
+&nbsp;
    use(s, ++i);
 </pre>
 </td>
 <td valign="top">
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
-   
+&nbsp;  
    auto __tmp = stuff();
    auto &amp; i = get&lt;0&gt;(__tmp);
    auto &amp; s = get&lt;1&gt;(__tmp);
-
+&nbsp;
    use(s, ++i);
 </pre>
 </td>
@@ -223,14 +223,14 @@ compiler
 <pre lang="cpp">
 #include &lt;string&gt;
 #include &lt;iostream&gt;
-
+&nbsp;
 struct Foo
 {
    int x = 0;
    std::string str = "world";
    ~Foo() { std::cout &lt;&lt; str; }
 };
-
+&nbsp;
 int main()
 {
     auto [ i, s ] = Foo();
@@ -243,14 +243,14 @@ int main()
 <pre lang="cpp">
 #include &lt;string&gt;
 #include &lt;iostream&gt;
-
+&nbsp;
 struct Foo
 {
    int x = 0;
    std::string str = "world";
    ~Foo() { std::cout &lt;&lt; str; }
 };
-
+&nbsp;
 int main()
 {
     auto __tmp = Foo();
@@ -284,9 +284,9 @@ compiler
 <pre lang="cpp">
    struct X { int i = 0; };
    X makeX();
-   
+&nbsp;   
    X x;
-   
+&nbsp;   
    auto [ b ] = makeX();
    b++;
    auto const [ c ] = makeX();
@@ -303,15 +303,15 @@ compiler
 <pre lang="cpp">
    struct X { int i = 0; };
    X makeX();
-   
+&nbsp;   
    X x;
-   
+&nbsp;   
    auto __tmp1 = makeX();
    __tmp1.i++;
    auto const __tmp2 = makeX();
    __tmp2.i++; //error: can't modify const
    auto &amp; __tmp3 = makeX(); //error: non-const ref cannot bind to temp
-   
+&nbsp;   
    auto &amp; _tmp3 = x;
    x.i++;
    auto const &amp; _tmp4 = makeX();
@@ -342,13 +342,13 @@ C++17
       int x;
       string str;
    };
-   
+&nbsp;   
    Foo stuff();
-     
-     
+&nbsp;     
+&nbsp;     
    auto [ i, s ] = stuff();
-
-
+&nbsp;
+&nbsp;
    use(s, ++i);
 </pre>
 </td>
@@ -358,13 +358,13 @@ C++17
       int x;
       string str;
    };
-   
+&nbsp;   
    Foo stuff();
-   
+&nbsp;   
    Foo __tmp = stuff();
    auto &amp; i = __tmp.x;
    auto &amp; s = __tmp.str;
-
+&nbsp;
    use(s, ++i);
 </pre>
 </td></tr>
@@ -395,11 +395,11 @@ C++17
    // or get outside class
    template&lt;int N&gt; auto get(Foo /*const?*/ &amp; foo) { /*...*/ }
    //...
-   
+&nbsp;   
    Foo stuff();
-
+&nbsp;
    auto [ i, s ] = stuff();
-
+&nbsp;
    use(s, ++i);
 </pre>
 </td>
@@ -417,11 +417,11 @@ etc
 <tr>
 <td valign="top">
 <pre lang="cpp">
-    
+&nbsp;    
    int arr[4] = { /*...*/ };
    auto [ a, b, c, d ] = arr; 
    auto [ t, u, v ] = std::array&lt;int,3&gt;();
-   
+&nbsp;   
    // now we're talkin'
    for (auto &amp;&amp; [key, value] : my_map)
    {
@@ -459,9 +459,9 @@ public:
   int const &amp; refInt() { return myInt; }
   string const &amp; refString() { return myString; }
 };
-
-
-
+&nbsp;
+&nbsp;
+&nbsp;
 // Hey compiler, keep an eye out for this template:
 template&lt;int N&gt; void get(Foo const &amp; foo)
 {
@@ -487,13 +487,13 @@ public:
   int const &amp; refInt() { return myInt; }
   string const &amp; refString() { return myString; }
 };
-
-
-
+&nbsp;
+&nbsp;
+&nbsp;
 template&lt;int N&gt; auto &amp; get(Foo const &amp; foo)
 {
   static_assert(0 &lt;= N &amp;&amp; N &lt; 2, "Foo only has 2 members");
-
+&nbsp;
   if constexpr (N == 0)  // !! LOOK HERE !!
      return foo.refInt();
   else if constexpr (N == 1)    // !! LOOK HERE !!
@@ -504,8 +504,9 @@ template&lt;int N&gt; auto &amp; get(Foo const &amp; foo)
 </tr>
 </table>
 
-
 P.S. `if constexpr (expression)` doesn't _check_ if the expression is constexpr.  The expression _must_ be constexpr (else it doesn't compile).  The part that is constexpr is 'doing' the if.  Don't think about this and what syntax might be better.  The committee argued about it long enough.
+
+
 Deduction Guides
 ---
 
@@ -552,13 +553,13 @@ struct Thingy
 {
   T t;
 };
-
+&nbsp;
 // !! LOOK HERE !!
 Thingy(const char *) -> Thingy&lt;std::string&gt;;
-
+&nbsp;
 Thingy thing{"A String"}; // thing.t is a `std::string`.
 </pre>
-_(example from Nicol Bolas)_
+_(example from "Nicol Bolas")_
 
 
 #### Implicit Deduction Guides
@@ -648,10 +649,10 @@ C++17
 <td  valign="top">
 <pre lang="cpp">
 auto sum() { return 0; }
-
+&nbsp;
 template &lt;typename T&gt;
 auto sum(T&amp;&amp; t) { return t; }
-
+&nbsp;
 template &lt;typename T, typename... Rest&gt;
 auto sum(T&amp;&amp; t, Rest&amp;&amp;... r) {
    return t + sum(std::forward&lt;Rest&gt;(r)...);
@@ -660,13 +661,11 @@ auto sum(T&amp;&amp; t, Rest&amp;&amp;... r) {
 </td>
 <td  valign="top">
 <pre lang="cpp">
-
-
-
-
-
-
-
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
 template &lt;typename... Args&gt;
 auto sum(Args&amp;&amp;... args) {
    return (args + ... + 0);
@@ -702,6 +701,8 @@ C++17
 </td>
 <td  valign="top">
 <pre lang="cpp">
+&nbsp;
+&nbsp;
    namespace A::B::C {
       struct Foo { };
       //...
@@ -767,7 +768,7 @@ C++17
 <pre lang="cpp">
 // foo.h
 extern int foo;
-
+&nbsp;
 // foo.cpp
 int foo = 10;
 </pre>
@@ -799,7 +800,7 @@ C++17
 struct Foo {
    static int foo;
 };
-
+&nbsp;
 // foo.cpp
 int Foo::foo = 10;
 </pre>
@@ -834,7 +835,7 @@ C++17
 <tr>
 <td  valign="top">
 <pre lang="cpp">
-
+&nbsp;
 // header &lt;mutex&gt;
 namespace std
 {
@@ -847,15 +848,15 @@ namespace std
       //...
    }
 }
-
+&nbsp;
 // your code
 lock_guard&lt;mutex&gt; grab_lock(mutex &amp; mtx)
 {
    return lock_guard&lt;mutex&gt;(mtx);
 }
-
+&nbsp;
 mutex mtx;
-
+&nbsp;
 void foo()
 {
    auto guard = grab_lock(mtx);
@@ -951,7 +952,7 @@ struct SomeInts
    void push_back(int);
    //etc
 };
-
+&nbsp;
 void random_fill(SomeInts &amp; container,
       int min, int max, int count)
 {
@@ -969,7 +970,7 @@ struct SomeInts
    void push_back(int);
    //etc
 };
-
+&nbsp;
 void random_fill(SomeInts &amp; container,
       int min, int max, int count)
 {
@@ -1007,17 +1008,17 @@ struct MyError {
   std::string message;
   int code;
 };
-
+&nbsp;
 MyError divide(int a, int b) {
   if (b == 0) {
     return {"Division by zero", -1};
   }
-
-  std::cout << (a / b) << '\n';
-
+&nbsp;
+  std::cout &lt;&lt; (a / b) &lt;&lt; '\n';
+&nbsp;
   return {};
 }
-
+&nbsp;
 divide(1, 2);
 </pre>
 </td>
@@ -1027,17 +1028,17 @@ struct [[nodiscard]] MyError {
   std::string message;
   int code;
 };
-
+&nbsp;
 MyError divide(int a, int b) {
   if (b == 0) {
     return {"Division by zero", -1};
   }
-
-  std::cout << (a / b) << '\n';
-
+&nbsp;
+  std::cout &lt;&lt; (a / b) &lt;&lt; '\n';
+&nbsp;
   return {};
 }
-
+&nbsp;
 divide(1, 2);
 </pre>
 </td>
@@ -1162,25 +1163,25 @@ C++17
 <pre lang="cpp">
 Foo parseFoo(std::string const &amp; input);
 Foo parseFoo(char const * str);
-
+&nbsp;
 Foo parseFoo(char const * str, int length);
-
-
-
-
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
 Foo parseFoo(MyString const &amp; str);
 </pre>
 </td>
 <td  valign="top">
 <pre lang="cpp">
 Foo parseFoo(std::string_view input);
-
+&nbsp;
 // I would say don't offer this interface, but:
 Foo parseFoo(char const * str, int length)
 {
    return parseFoo(string_view(str,length));
 }
-
+&nbsp;
 class MyString {
    //...
    operator string_view() const
@@ -1203,7 +1204,10 @@ So instead, return `string_view`.
 
 `string_view` does NOT own the string memory.  It points to memory owned elsewhere, similar to how a reference or pointer or iterator works.
 It has _reference semantics_.
-std::optional<T>
+
+
+
+std::optional&lt;T&gt;
 ---
 
 So, we have
@@ -1328,12 +1332,12 @@ struct Stuff
 <pre lang="cpp">
 struct Stuff
 {
-
-
-
-
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
    std::variant&lt;int, double, string&gt; data;
-
+&nbsp;
 };
 
 </pre>
@@ -1360,9 +1364,9 @@ C++17
 void handleData(int i);
 void handleData(double d);
 void handleData(string const &amp; s);
-
+&nbsp;
 //...
-
+&nbsp;
 switch (stuff.type)
 {
 case INT:
@@ -1382,13 +1386,13 @@ case STRING:
 void handleData(int i);
 void handleData(double d);
 void handleData(string const &amp; s);
-
+&nbsp;
 //...
-
+&nbsp;
 std::visit([](auto const &amp; val) { handleData(val); }, stuff.data);
-
+&nbsp;
 // can also switch(stuff.data.index())
-
+&nbsp;
 </pre>
 </td>
 </tr>
@@ -1413,10 +1417,10 @@ struct ThatLambda
    void operator()(double const &amp; d) { handleData(d); }
    void operator()(string const &amp; s) { handleData(s); }
 };
-
+&nbsp;
 ThatLambda thatLambda;
 std::visit(thatLambda, stuff.data);
-
+&nbsp;
 </pre>
 </td>
 </tr>
@@ -1438,10 +1442,10 @@ C++17
 <pre lang="cpp">
 if (holds_alternative&lt;int&gt;(data))
    int i = get&lt;int&gt;(data);
-
+&nbsp;
 // throws if not double:
 double d = get&lt;double&gt;(data);
-
+&nbsp;
 </pre>
 </td>
 </tr>
@@ -1461,19 +1465,19 @@ C++17
 <pre lang="cpp">
 std::variant&lt;Foo, Bar&gt; var;  // calls Foo()
 // (or doesn't compile if no Foo())
-
+&nbsp;
 Bar bar = makeBar();
 var = bar; // calls ~Foo() and Bar(Bar const &amp;)
 // (what if Bar(Bar const &amp; b) throws?)
-
+&nbsp;
 var = Foo(); // calls ~Bar() and move-ctor Foo(Foo &amp;&amp;)
 // (what if Foo(Foo &amp;&amp; b) throws? - even though moves shouldn't throw)
-
+&nbsp;
 var = someFoo;  // calls Foo::operator=(Foo const &amp;)
-
-
+&nbsp;
+&nbsp;
 std::variant&lt;Foo, std::string&gt; foostr;
-
+&nbsp;
 foostr = "hello"; // char * isn't Foo or string
 // yet foostr holds a std::string
 </pre>
@@ -1577,14 +1581,14 @@ C++17
 <td  valign="top">
 <pre lang="cpp">
 #include &lt;windows.h&gt;
-
+&nbsp;
 void copy_foobar() {
   std::wstring dir = L"\\sandbox";
   std::wstring p = dir + L"\\foobar.txt";
   std::wstring copy = p;
   copy += ".bak";
   CopyFile(p, copy, false);
-  
+&nbsp;  
   std::string dir_copy = dir + ".bak";
   SHFILEOPSTRUCT s = { 0 };
   s.hwnd = someHwndFromSomewhere;
@@ -1594,17 +1598,17 @@ void copy_foobar() {
   s.pTo = dir_copy.c_str();
   SHFileOperation(&amp;s);
 }
-
+&nbsp;
 void display_contents(std::wstring const &amp; p) {
   std::cout &lt;&lt; p &lt;&lt; "\n";
-
+&nbsp;
   std::wstring search = p + "\\*";
   WIN32_FIND_DATA ffd;
   HANDLE hFind =
         FindFirstFile(search.c_str(), &amp;ffd);
   if (hFind == INVALID_HANDLE_VALUE)
      return;
-  
+&nbsp;  
   do {
     if ( ffd.dwFileAttributes
          &amp; FILE_ATTRIBUTE_DIRECTORY) {
@@ -1626,7 +1630,7 @@ void display_contents(std::wstring const &amp; p) {
 #include &lt;filesystem&gt;
 #include &lt;iostream&gt;
 namespace fs = std::filesystem;
-
+&nbsp;
 void copy_foobar() {
   fs::path dir = "/";
   dir /= "sandbox";
@@ -1638,13 +1642,13 @@ void copy_foobar() {
   dir_copy += ".bak";
   fs::copy(dir, dir_copy, fs::copy_options::recursive);
 }
-
+&nbsp;
 void display_contents(fs::path const &amp; p) {
   std::cout &lt;&lt; p.filename() &lt;&lt; "\n";
-
+&nbsp;
   if (!fs::is_directory(p))
     return;
-
+&nbsp;
   for (auto const &amp; e: fs::directory_iterator{p}) {
     if (fs::is_regular_file(e.status())) {
       std::cout &lt;&lt; "  " &lt;&lt; e.path().filename()
@@ -1668,30 +1672,30 @@ C++14 POSIX
 #include &lt;dirent.h&gt;
 #include &lt;sys/stat.h&gt;
 #include &lt;sys/types.h&gt;
-
+&nbsp;
 void copy_foobar() {
-
+&nbsp;
 // [TODO]
 // to copy file, use fread / fwrite
-
+&nbsp;
 // how to copy directory...?
 }
-
+&nbsp;
 void display_contents(std::string const &amp; p) {
   std::cout &lt;&lt; p &lt;&lt; "\n";
-
+&nbsp;
   struct dirent *dp;
   DIR *dfd;
-  
+ &nbsp; 
   if ((dfd = opendir(p.c_str()) == nullptr)
     return;
-
+&nbsp;
   while((dp = readdir(dfd)) != nullptr) {
     struct stat st;
     string filename = p + "/" + dp->d_Name;
     if (stat(filename.c_str(), &amp;st) == -1)
       continue;
-      
+&nbsp;      
     if ((st.st_mode &amp; S_IFMT) == S_IFDIR)
       std::cout &lt;&lt; "  " &lt;&lt; filename &lt;&lt; "\n";
     } else {
@@ -1835,13 +1839,11 @@ auto binarySearch(T first, T second)
 </td>
 <td  valign="top">
 <pre lang="cpp">
-
-
-
-
-
-
-
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
 template &lt;RandomAccessIterator T&gt;
 auto binarySearch(T first, T second)
 {
