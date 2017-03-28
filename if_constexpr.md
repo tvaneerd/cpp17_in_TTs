@@ -18,6 +18,7 @@ C++17
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
 class Foo {
   int myInt;
@@ -46,6 +47,7 @@ template&lt;&gt; string const &amp; get&lt;1&gt;(Foo const &amp; foo)
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
 class Foo {
   int myInt;
