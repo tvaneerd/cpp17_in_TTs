@@ -9,6 +9,7 @@ Caveat2: *I make mistakes.*  This is more likely :-)
 Created with the support of my employer, [Christie Digital Systems](https://www.christiedigital.com/en-us/business/solutions/projection-mapping).
 
 ---
+
 if-init
 ---
 
@@ -20,6 +21,7 @@ C++
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 {
    if (Foo * ptr = get_foo())
@@ -42,6 +44,7 @@ C++
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 {
    {
@@ -67,6 +70,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 {
    {
@@ -79,13 +83,14 @@ C++17
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 {
-   &nbsp;
-   &nbsp;
+   
+   
    if (QVariant var = getAnswer(); var.isValid())
       use(var);
-   &nbsp;
+      
    more_code();
 }
 </pre>
@@ -104,6 +109,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 {
    switch (Device dev = get_device(); dev.state())
@@ -117,6 +123,7 @@ C++17
 </td>
 </tr>
 </table>
+
 
 Structured Bindings 
 -------------------
@@ -132,35 +139,38 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
-&nbsp;
+   
    auto tup = stuff();
    int i = get&lt;0&gt;(tup);
    string s = get&lt;1&gt;(tup);
-&nbsp;
+  
    use(s, ++i);
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
-&nbsp;   
+   
    int i;
    string s;
    std::tie(i,s) = stuff();
-&nbsp;
+
    use(s, ++i);
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
-&nbsp;   
-&nbsp;   
+   
+   
    auto [ i, s ] = stuff();
-&nbsp;
-&nbsp;
+
+
    use(s, ++i);
 </pre>
 </td>
@@ -180,24 +190,26 @@ compiler
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
-&nbsp;   
-&nbsp;   
+   
+   
    auto [ i, s ] = stuff();
-&nbsp;
-&nbsp;
+
+
    use(s, ++i);
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
-&nbsp;  
+   
    auto __tmp = stuff();
    auto &amp; i = get&lt;0&gt;(__tmp);
    auto &amp; s = get&lt;1&gt;(__tmp);
-&nbsp;
+
    use(s, ++i);
 </pre>
 </td>
@@ -220,17 +232,18 @@ compiler
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
 #include &lt;string&gt;
 #include &lt;iostream&gt;
-&nbsp;
+
 struct Foo
 {
    int x = 0;
    std::string str = "world";
    ~Foo() { std::cout &lt;&lt; str; }
 };
-&nbsp;
+
 int main()
 {
     auto [ i, s ] = Foo();
@@ -240,17 +253,18 @@ int main()
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
 #include &lt;string&gt;
 #include &lt;iostream&gt;
-&nbsp;
+
 struct Foo
 {
    int x = 0;
    std::string str = "world";
    ~Foo() { std::cout &lt;&lt; str; }
 };
-&nbsp;
+
 int main()
 {
     auto __tmp = Foo();
@@ -281,12 +295,13 @@ compiler
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
    struct X { int i = 0; };
    X makeX();
-&nbsp;   
+   
    X x;
-&nbsp;   
+   
    auto [ b ] = makeX();
    b++;
    auto const [ c ] = makeX();
@@ -300,18 +315,19 @@ compiler
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
    struct X { int i = 0; };
    X makeX();
-&nbsp;   
+   
    X x;
-&nbsp;   
+   
    auto __tmp1 = makeX();
    __tmp1.i++;
    auto const __tmp2 = makeX();
    __tmp2.i++; //error: can't modify const
    auto &amp; __tmp3 = makeX(); //error: non-const ref cannot bind to temp
-&nbsp;   
+   
    auto &amp; _tmp3 = x;
    x.i++;
    auto const &amp; _tmp4 = makeX();
@@ -337,34 +353,36 @@ C++17
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
    struct Foo {
       int x;
       string str;
    };
-&nbsp;   
+   
    Foo stuff();
-&nbsp;     
-&nbsp;     
+     
+     
    auto [ i, s ] = stuff();
-&nbsp;
-&nbsp;
+
+
    use(s, ++i);
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
    struct Foo {
       int x;
       string str;
    };
-&nbsp;   
+   
    Foo stuff();
-&nbsp;   
+   
    Foo __tmp = stuff();
    auto &amp; i = __tmp.x;
    auto &amp; s = __tmp.str;
-&nbsp;
+
    use(s, ++i);
 </pre>
 </td></tr>
@@ -382,6 +400,7 @@ C++17
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
    class Foo {
       // ...
@@ -395,11 +414,11 @@ C++17
    // or get outside class
    template&lt;int N&gt; auto get(Foo /*const?*/ &amp; foo) { /*...*/ }
    //...
-&nbsp;   
+   
    Foo stuff();
-&nbsp;
+
    auto [ i, s ] = stuff();
-&nbsp;
+
    use(s, ++i);
 </pre>
 </td>
@@ -416,12 +435,13 @@ etc
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
-&nbsp;    
+    
    int arr[4] = { /*...*/ };
    auto [ a, b, c, d ] = arr; 
    auto [ t, u, v ] = std::array&lt;int,3&gt;();
-&nbsp;   
+   
    // now we're talkin'
    for (auto &amp;&amp; [key, value] : my_map)
    {
@@ -431,6 +451,7 @@ etc
 </td>
 </tr>
 </table>
+
 Constexpr If
 ------------
 
@@ -451,6 +472,7 @@ C++17
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
 class Foo {
   int myInt;
@@ -459,9 +481,9 @@ public:
   int const &amp; refInt() { return myInt; }
   string const &amp; refString() { return myString; }
 };
-&nbsp;
-&nbsp;
-&nbsp;
+
+
+
 // Hey compiler, keep an eye out for this template:
 template&lt;int N&gt; void get(Foo const &amp; foo)
 {
@@ -479,6 +501,7 @@ template&lt;&gt; string const &amp; get&lt;1&gt;(Foo const &amp; foo)
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
 class Foo {
   int myInt;
@@ -487,13 +510,13 @@ public:
   int const &amp; refInt() { return myInt; }
   string const &amp; refString() { return myString; }
 };
-&nbsp;
-&nbsp;
-&nbsp;
+
+
+
 template&lt;int N&gt; auto &amp; get(Foo const &amp; foo)
 {
   static_assert(0 &lt;= N &amp;&amp; N &lt; 2, "Foo only has 2 members");
-&nbsp;
+
   if constexpr (N == 0)  // !! LOOK HERE !!
      return foo.refInt();
   else if constexpr (N == 1)    // !! LOOK HERE !!
@@ -504,8 +527,8 @@ template&lt;int N&gt; auto &amp; get(Foo const &amp; foo)
 </tr>
 </table>
 
-P.S. `if constexpr (expression)` doesn't _check_ if the expression is constexpr.  The expression _must_ be constexpr (else it doesn't compile).  The part that is constexpr is 'doing' the if.  Don't think about this and what syntax might be better.  The committee argued about it long enough.
 
+P.S. `if constexpr (expression)` doesn't _check_ if the expression is constexpr.  The expression _must_ be constexpr (else it doesn't compile).  The part that is constexpr is 'doing' the if.  Don't think about this and what syntax might be better.  The committee argued about it long enough.
 
 Deduction Guides
 ---
@@ -523,6 +546,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 pair&lt;int, string&gt; is1 = pair&lt;int, string&gt;(17, "hello");
 auto is2 = std::pair&lt;int, string&gt;(17, "hello");
@@ -531,6 +555,7 @@ auto is4 = std::make_pair(17, "hello"s);
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 pair&lt;int, string&gt; is1 = pair(17, "hello");
 auto is2 = pair(17, "hello"); // !! pair&lt;int, char const *&gt;
@@ -546,17 +571,16 @@ The magic behind the above is called "deduction guides".  In particular, _implic
 #### Explicit Deduction Guides
 
 
-
 <pre lang=cpp>
 template&lt;typename T&gt;
 struct Thingy
 {
   T t;
 };
-&nbsp;
+
 // !! LOOK HERE !!
 Thingy(const char *) -> Thingy&lt;std::string&gt;;
-&nbsp;
+
 Thingy thing{"A String"}; // thing.t is a `std::string`.
 </pre>
 _(example from "Nicol Bolas")_
@@ -564,12 +588,12 @@ _(example from "Nicol Bolas")_
 
 #### Implicit Deduction Guides
 
-
 For any `template<typename T, typename U, etc> struct`... (or class!)
 if there is a constructor that takes `T` and `U` such that it can figure out all the types,
 then that constructor forms an "implicit" deduction guide.  ie just like the explicit one above, but the compiler does it for you.
 
 More importantly, the above should say **for all** templatized types...  ie whether you want it or not.
+
 
 template\<auto>
 ---
@@ -585,6 +609,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 template &lt;typename T, T v&gt;
 struct integral_constant
@@ -596,6 +621,7 @@ integral_constant&lt;char, 'a'&gt;::value
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 template &lt;auto v&gt;
 struct integral_constant
@@ -628,6 +654,7 @@ How do you write `sum()` ?
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 auto x = sum(5, 8);
 auto y = sum(a, b, 17, 3.14, etc);
@@ -647,12 +674,13 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 auto sum() { return 0; }
-&nbsp;
+
 template &lt;typename T&gt;
 auto sum(T&amp;&amp; t) { return t; }
-&nbsp;
+
 template &lt;typename T, typename... Rest&gt;
 auto sum(T&amp;&amp; t, Rest&amp;&amp;... r) {
    return t + sum(std::forward&lt;Rest&gt;(r)...);
@@ -660,12 +688,15 @@ auto sum(T&amp;&amp; t, Rest&amp;&amp;... r) {
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+
+
+
+
+
+
+
 template &lt;typename... Args&gt;
 auto sum(Args&amp;&amp;... args) {
    return (args + ... + 0);
@@ -674,6 +705,7 @@ auto sum(Args&amp;&amp;... args) {
 </td>
 </tr>
 </table>
+
 Nested Namespaces
 ---
 
@@ -688,6 +720,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
    namespace A {
       namespace B {
@@ -700,9 +733,8 @@ C++17
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
-&nbsp;
-&nbsp;
    namespace A::B::C {
       struct Foo { };
       //...
@@ -728,11 +760,13 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 static_assert(sizeof(short) == 2, "sizeof(short) == 2")
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 static_assert(sizeof(short) == 2)
 </pre>
@@ -765,15 +799,17 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 // foo.h
 extern int foo;
-&nbsp;
+
 // foo.cpp
 int foo = 10;
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 // foo.h
 inline int foo = 10;
@@ -795,17 +831,19 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 // foo.h
 struct Foo {
    static int foo;
 };
-&nbsp;
+
 // foo.cpp
 int Foo::foo = 10;
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 // foo.h
 struct Foo {
@@ -834,8 +872,9 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
-&nbsp;
+
 // header &lt;mutex&gt;
 namespace std
 {
@@ -848,15 +887,15 @@ namespace std
       //...
    }
 }
-&nbsp;
+
 // your code
 lock_guard&lt;mutex&gt; grab_lock(mutex &amp; mtx)
 {
    return lock_guard&lt;mutex&gt;(mtx);
 }
-&nbsp;
+
 mutex mtx;
-&nbsp;
+
 void foo()
 {
    auto guard = grab_lock(mtx);
@@ -866,6 +905,7 @@ void foo()
 </td>
 </tr>
 </table>
+
 
 
 
@@ -889,6 +929,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 switch (device.status())
 {
@@ -905,6 +946,7 @@ case bad:
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 switch (device.status())
 {
@@ -945,6 +987,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 struct SomeInts
 {
@@ -952,7 +995,7 @@ struct SomeInts
    void push_back(int);
    //etc
 };
-&nbsp;
+
 void random_fill(SomeInts &amp; container,
       int min, int max, int count)
 {
@@ -963,6 +1006,7 @@ void random_fill(SomeInts &amp; container,
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 struct SomeInts
 {
@@ -970,7 +1014,7 @@ struct SomeInts
    void push_back(int);
    //etc
 };
-&nbsp;
+
 void random_fill(SomeInts &amp; container,
       int min, int max, int count)
 {
@@ -1003,42 +1047,44 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 struct MyError {
   std::string message;
   int code;
 };
-&nbsp;
+
 MyError divide(int a, int b) {
   if (b == 0) {
     return {"Division by zero", -1};
   }
-&nbsp;
+
   std::cout &lt;&lt; (a / b) &lt;&lt; '\n';
-&nbsp;
+
   return {};
 }
-&nbsp;
+
 divide(1, 2);
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 struct [[nodiscard]] MyError {
   std::string message;
   int code;
 };
-&nbsp;
+
 MyError divide(int a, int b) {
   if (b == 0) {
     return {"Division by zero", -1};
   }
-&nbsp;
+
   std::cout &lt;&lt; (a / b) &lt;&lt; '\n';
-&nbsp;
+
   return {};
 }
-&nbsp;
+
 divide(1, 2);
 </pre>
 </td>
@@ -1070,6 +1116,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
    bool res = step1();
    assert(res);
@@ -1078,6 +1125,7 @@ C++17
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
    [[maybe_unused]] bool res = step1();
    assert(res);
@@ -1109,6 +1157,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
    [[maybe_unused]] void f()
    {
@@ -1121,6 +1170,7 @@ C++17
 </td>
 </tr>
 </table>
+
 
 
 std::string_view
@@ -1160,28 +1210,30 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 Foo parseFoo(std::string const &amp; input);
 Foo parseFoo(char const * str);
-&nbsp;
+
 Foo parseFoo(char const * str, int length);
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+
+
+
+
 Foo parseFoo(MyString const &amp; str);
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 Foo parseFoo(std::string_view input);
-&nbsp;
+
 // I would say don't offer this interface, but:
 Foo parseFoo(char const * str, int length)
 {
    return parseFoo(string_view(str,length));
 }
-&nbsp;
+
 class MyString {
    //...
    operator string_view() const
@@ -1204,8 +1256,6 @@ So instead, return `string_view`.
 
 `string_view` does NOT own the string memory.  It points to memory owned elsewhere, similar to how a reference or pointer or iterator works.
 It has _reference semantics_.
-
-
 
 std::optional&lt;T&gt;
 ---
@@ -1234,6 +1284,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 // returns default Foo on error
 Foo parseFoo(std::string_view in);
@@ -1250,6 +1301,7 @@ unique_ptr&lt;Foo&gt; parseFoo(std::string_view in);
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 
 
@@ -1278,6 +1330,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 optional ofoo = parseFoo(str);
 if (ofoo)
@@ -1287,6 +1340,7 @@ if (ofoo)
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 optional&lt;int&gt; oi = parseInt(str);
 std::cout &lt;&lt; oi.value_or(0);
@@ -1298,6 +1352,7 @@ std::cout &lt;&lt; oi.value_or(0);
 
 Note, optional is **not just for errors**, and exceptions are still the go-to choice for error handling.  
 See also boost::optional, Haskell's Maybe, etc.
+
 
 std::variant<A,B,C,...>
 ---
@@ -1316,6 +1371,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 struct Stuff
 {
@@ -1329,15 +1385,16 @@ struct Stuff
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 struct Stuff
 {
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+
+
+
+
    std::variant&lt;int, double, string&gt; data;
-&nbsp;
+
 };
 
 </pre>
@@ -1360,13 +1417,14 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 void handleData(int i);
 void handleData(double d);
 void handleData(string const &amp; s);
-&nbsp;
+
 //...
-&nbsp;
+
 switch (stuff.type)
 {
 case INT:
@@ -1382,17 +1440,18 @@ case STRING:
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 void handleData(int i);
 void handleData(double d);
 void handleData(string const &amp; s);
-&nbsp;
+
 //...
-&nbsp;
+
 std::visit([](auto const &amp; val) { handleData(val); }, stuff.data);
-&nbsp;
+
 // can also switch(stuff.data.index())
-&nbsp;
+
 </pre>
 </td>
 </tr>
@@ -1410,6 +1469,7 @@ How the above lambda works
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 struct ThatLambda
 {
@@ -1417,10 +1477,10 @@ struct ThatLambda
    void operator()(double const &amp; d) { handleData(d); }
    void operator()(string const &amp; s) { handleData(s); }
 };
-&nbsp;
+
 ThatLambda thatLambda;
 std::visit(thatLambda, stuff.data);
-&nbsp;
+
 </pre>
 </td>
 </tr>
@@ -1439,13 +1499,14 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 if (holds_alternative&lt;int&gt;(data))
    int i = get&lt;int&gt;(data);
-&nbsp;
+
 // throws if not double:
 double d = get&lt;double&gt;(data);
-&nbsp;
+
 </pre>
 </td>
 </tr>
@@ -1462,28 +1523,30 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 std::variant&lt;Foo, Bar&gt; var;  // calls Foo()
 // (or doesn't compile if no Foo())
-&nbsp;
+
 Bar bar = makeBar();
 var = bar; // calls ~Foo() and Bar(Bar const &amp;)
 // (what if Bar(Bar const &amp; b) throws?)
-&nbsp;
+
 var = Foo(); // calls ~Bar() and move-ctor Foo(Foo &amp;&amp;)
 // (what if Foo(Foo &amp;&amp; b) throws? - even though moves shouldn't throw)
-&nbsp;
+
 var = someFoo;  // calls Foo::operator=(Foo const &amp;)
-&nbsp;
-&nbsp;
+
+
 std::variant&lt;Foo, std::string&gt; foostr;
-&nbsp;
+
 foostr = "hello"; // char * isn't Foo or string
 // yet foostr holds a std::string
 </pre>
 </td>
 </tr>
 </table>
+
 
 
 std::any
@@ -1506,6 +1569,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 void * v = ...;
 if (v != nullptr) {
@@ -1515,6 +1579,7 @@ if (v != nullptr) {
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 std::any v = ...;
 if (v.has_value()) {
@@ -1524,6 +1589,7 @@ if (v.has_value()) {
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 std::any v = ...;
 if (v.type() == typeid(int)) {
@@ -1549,21 +1615,22 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 // can hold Circles, Squares, Triangles,...
 std::vector&lt;Shape *&gt; shapes;
-// requires lots of calls to new
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 // can hold Circles, Squares, Triangles, ints, strings,...
 std::vector&lt;any&gt; things;
-// no calls to new
 </pre>
 </td>
 </tr>
 </table>
+
 
 namespace std::filesystem
 ---
@@ -1579,16 +1646,17 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 #include &lt;windows.h&gt;
-&nbsp;
+
 void copy_foobar() {
   std::wstring dir = L"\\sandbox";
   std::wstring p = dir + L"\\foobar.txt";
   std::wstring copy = p;
   copy += ".bak";
   CopyFile(p, copy, false);
-&nbsp;  
+  
   std::string dir_copy = dir + ".bak";
   SHFILEOPSTRUCT s = { 0 };
   s.hwnd = someHwndFromSomewhere;
@@ -1598,17 +1666,17 @@ void copy_foobar() {
   s.pTo = dir_copy.c_str();
   SHFileOperation(&amp;s);
 }
-&nbsp;
+
 void display_contents(std::wstring const &amp; p) {
   std::cout &lt;&lt; p &lt;&lt; "\n";
-&nbsp;
+
   std::wstring search = p + "\\*";
   WIN32_FIND_DATA ffd;
   HANDLE hFind =
         FindFirstFile(search.c_str(), &amp;ffd);
   if (hFind == INVALID_HANDLE_VALUE)
      return;
-&nbsp;  
+  
   do {
     if ( ffd.dwFileAttributes
          &amp; FILE_ATTRIBUTE_DIRECTORY) {
@@ -1626,11 +1694,12 @@ void display_contents(std::wstring const &amp; p) {
 </pre>
 </td>
 <td  valign="top" rowspan="3">
+
 <pre lang="cpp">
 #include &lt;filesystem&gt;
 #include &lt;iostream&gt;
 namespace fs = std::filesystem;
-&nbsp;
+
 void copy_foobar() {
   fs::path dir = "/";
   dir /= "sandbox";
@@ -1642,13 +1711,13 @@ void copy_foobar() {
   dir_copy += ".bak";
   fs::copy(dir, dir_copy, fs::copy_options::recursive);
 }
-&nbsp;
+
 void display_contents(fs::path const &amp; p) {
   std::cout &lt;&lt; p.filename() &lt;&lt; "\n";
-&nbsp;
+
   if (!fs::is_directory(p))
     return;
-&nbsp;
+
   for (auto const &amp; e: fs::directory_iterator{p}) {
     if (fs::is_regular_file(e.status())) {
       std::cout &lt;&lt; "  " &lt;&lt; e.path().filename()
@@ -1668,34 +1737,35 @@ C++14 POSIX
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 #include &lt;dirent.h&gt;
 #include &lt;sys/stat.h&gt;
 #include &lt;sys/types.h&gt;
-&nbsp;
+
 void copy_foobar() {
-&nbsp;
+
 // [TODO]
 // to copy file, use fread / fwrite
-&nbsp;
+
 // how to copy directory...?
 }
-&nbsp;
+
 void display_contents(std::string const &amp; p) {
   std::cout &lt;&lt; p &lt;&lt; "\n";
-&nbsp;
+
   struct dirent *dp;
   DIR *dfd;
- &nbsp; 
+  
   if ((dfd = opendir(p.c_str()) == nullptr)
     return;
-&nbsp;
+
   while((dp = readdir(dfd)) != nullptr) {
     struct stat st;
     string filename = p + "/" + dp->d_Name;
     if (stat(filename.c_str(), &amp;st) == -1)
       continue;
-&nbsp;      
+      
     if ((st.st_mode &amp; S_IFMT) == S_IFDIR)
       std::cout &lt;&lt; "  " &lt;&lt; filename &lt;&lt; "\n";
     } else {
@@ -1710,6 +1780,7 @@ void display_contents(std::string const &amp; p) {
 </tr>
 
 </table>
+
 Parallel STL
 ---
 
@@ -1756,6 +1827,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 std::for_each(first, last,
     [](auto &amp; x){ process(x); }
@@ -1768,6 +1840,7 @@ std::transform(xfirst, xlast, yfirst,
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 std::for_each(std::par, first, last,
     [](auto &amp; x){ process(x); }
@@ -1790,6 +1863,7 @@ std::transform(std::execution::par_unseq, xfirst, xlast, yfirst,
 std::execution::seq | indeterminately sequenced in the **calling thread**
 std::execution::par | **multiple threads** - calls are indeterminately sequenced with respect to each other within the same thread
 std::execution::par_unseq | **multiple threads and may be vectorized** - calls are unsequenced with respect to each other and possibly interleaved
+
 
 
 Technical Specifications (TS)
@@ -1824,6 +1898,7 @@ Concepts TS
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 //
 // T must be a Random Access Iterator
@@ -1838,12 +1913,15 @@ auto binarySearch(T first, T second)
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+
+
+
+
+
+
+
 template &lt;RandomAccessIterator T&gt;
 auto binarySearch(T first, T second)
 {
@@ -1854,6 +1932,7 @@ auto binarySearch(T first, T second)
 </tr>
 <tr>
 <td  valign="top">
+
 <pre>
 error: syntax error '[' unexpected
 error: gibberish
@@ -1863,6 +1942,7 @@ error: for pages and pages
 </pre>
 </td>
 <td  valign="top">
+
 <pre>
 error: MyIter does not model RandomAccessIterator
 </pre>
@@ -1915,6 +1995,7 @@ _Boost ASIO._
 ---
 
 
+
 ---
 
 Some sources I used, and/or places for good C++17 info:
@@ -1924,4 +2005,4 @@ https://skebanga.github.io/structured-bindings/
 http://www.bfilipek.com/2017/01/cpp17features.html  
 http://en.cppreference.com  
 http://stackoverflow.com  
-Bryce Adelstein Lelbach's talk
+Bryce Adelstein Lelbach's talk, coming soon to C++Now 2017
