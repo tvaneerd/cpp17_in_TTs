@@ -18,6 +18,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 void * v = ...;
 if (v != nullptr) {
@@ -27,6 +28,7 @@ if (v != nullptr) {
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 std::any v = ...;
 if (v.has_value()) {
@@ -36,6 +38,7 @@ if (v.has_value()) {
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 std::any v = ...;
 if (v.type() == typeid(int)) {
@@ -61,17 +64,17 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 // can hold Circles, Squares, Triangles,...
 std::vector&lt;Shape *&gt; shapes;
-// requires lots of calls to new
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 // can hold Circles, Squares, Triangles, ints, strings,...
 std::vector&lt;any&gt; things;
-// no calls to new
 </pre>
 </td>
 </tr>
