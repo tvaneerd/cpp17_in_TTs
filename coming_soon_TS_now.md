@@ -30,6 +30,7 @@ Concepts TS
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 //
 // T must be a Random Access Iterator
@@ -44,6 +45,7 @@ auto binarySearch(T first, T second)
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 
 
@@ -62,6 +64,7 @@ auto binarySearch(T first, T second)
 </tr>
 <tr>
 <td  valign="top">
+
 <pre>
 error: syntax error '[' unexpected
 error: gibberish
@@ -71,6 +74,7 @@ error: for pages and pages
 </pre>
 </td>
 <td  valign="top">
+
 <pre>
 error: MyIter does not model RandomAccessIterator
 </pre>

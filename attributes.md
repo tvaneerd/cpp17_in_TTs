@@ -16,6 +16,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 switch (device.status())
 {
@@ -32,6 +33,7 @@ case bad:
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 switch (device.status())
 {
@@ -72,6 +74,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 struct SomeInts
 {
@@ -90,6 +93,7 @@ void random_fill(SomeInts &amp; container,
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 struct SomeInts
 {
@@ -130,6 +134,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 struct MyError {
   std::string message;
@@ -141,7 +146,7 @@ MyError divide(int a, int b) {
     return {"Division by zero", -1};
   }
 
-  std::cout << (a / b) << '\n';
+  std::cout &lt;&lt; (a / b) &lt;&lt; '\n';
 
   return {};
 }
@@ -150,6 +155,7 @@ divide(1, 2);
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 struct [[nodiscard]] MyError {
   std::string message;
@@ -161,7 +167,7 @@ MyError divide(int a, int b) {
     return {"Division by zero", -1};
   }
 
-  std::cout << (a / b) << '\n';
+   std::cout &lt;&lt; (a / b) &lt;&lt; '\n';
 
   return {};
 }
@@ -197,6 +203,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
    bool res = step1();
    assert(res);
@@ -205,6 +212,7 @@ C++17
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
    [[maybe_unused]] bool res = step1();
    assert(res);
@@ -236,6 +244,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
    [[maybe_unused]] void f()
    {

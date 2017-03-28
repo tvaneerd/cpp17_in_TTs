@@ -9,6 +9,7 @@ C++
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 {
    if (Foo * ptr = get_foo())
@@ -31,6 +32,7 @@ C++
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 {
    {
@@ -56,6 +58,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 {
    {
@@ -68,6 +71,7 @@ C++17
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 {
    
@@ -93,6 +97,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 {
    switch (Device dev = get_device(); dev.state())

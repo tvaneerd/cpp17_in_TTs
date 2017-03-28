@@ -15,6 +15,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 struct Stuff
 {
@@ -28,6 +29,7 @@ struct Stuff
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 struct Stuff
 {
@@ -59,6 +61,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 void handleData(int i);
 void handleData(double d);
@@ -81,6 +84,7 @@ case STRING:
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 void handleData(int i);
 void handleData(double d);
@@ -109,6 +113,7 @@ How the above lambda works
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 struct ThatLambda
 {
@@ -138,6 +143,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 if (holds_alternative&lt;int&gt;(data))
    int i = get&lt;int&gt;(data);
@@ -161,6 +167,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 std::variant&lt;Foo, Bar&gt; var;  // calls Foo()
 // (or doesn't compile if no Foo())

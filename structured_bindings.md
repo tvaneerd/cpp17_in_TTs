@@ -12,6 +12,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
    
@@ -23,6 +24,7 @@ C++17
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
    
@@ -34,6 +36,7 @@ C++17
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
    tuple&lt;int, string&gt; stuff();
    
@@ -60,6 +63,7 @@ compiler
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
    
@@ -71,6 +75,7 @@ compiler
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
    pair&lt;int, string&gt; stuff();
    
@@ -100,6 +105,7 @@ compiler
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
 #include &lt;string&gt;
 #include &lt;iostream&gt;
@@ -120,6 +126,7 @@ int main()
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
 #include &lt;string&gt;
 #include &lt;iostream&gt;
@@ -161,6 +168,7 @@ compiler
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
    struct X { int i = 0; };
    X makeX();
@@ -180,6 +188,7 @@ compiler
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
    struct X { int i = 0; };
    X makeX();
@@ -217,6 +226,7 @@ C++17
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
    struct Foo {
       int x;
@@ -233,6 +243,7 @@ C++17
 </pre>
 </td>
 <td valign="top">
+
 <pre lang="cpp">
    struct Foo {
       int x;
@@ -262,6 +273,7 @@ C++17
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
    class Foo {
       // ...
@@ -296,6 +308,7 @@ etc
 </tr>
 <tr>
 <td valign="top">
+
 <pre lang="cpp">
     
    int arr[4] = { /*...*/ };

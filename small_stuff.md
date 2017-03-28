@@ -12,6 +12,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
    namespace A {
       namespace B {
@@ -24,6 +25,7 @@ C++17
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
    namespace A::B::C {
       struct Foo { };
@@ -50,11 +52,13 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 static_assert(sizeof(short) == 2, "sizeof(short) == 2")
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 static_assert(sizeof(short) == 2)
 </pre>
@@ -87,6 +91,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 // foo.h
 extern int foo;
@@ -96,6 +101,7 @@ int foo = 10;
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 // foo.h
 inline int foo = 10;
@@ -117,6 +123,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 // foo.h
 struct Foo {
@@ -128,6 +135,7 @@ int Foo::foo = 10;
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 // foo.h
 struct Foo {
@@ -156,6 +164,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 
 // header &lt;mutex&gt;

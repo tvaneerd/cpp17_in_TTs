@@ -1,4 +1,4 @@
-std::optional<T>
+std::optional&lt;T&gt;
 ---
 
 So, we have
@@ -25,6 +25,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 // returns default Foo on error
 Foo parseFoo(std::string_view in);
@@ -41,6 +42,7 @@ unique_ptr&lt;Foo&gt; parseFoo(std::string_view in);
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 
 
@@ -69,6 +71,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 optional ofoo = parseFoo(str);
 if (ofoo)
@@ -78,6 +81,7 @@ if (ofoo)
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 optional&lt;int&gt; oi = parseInt(str);
 std::cout &lt;&lt; oi.value_or(0);

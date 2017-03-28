@@ -44,6 +44,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 std::for_each(first, last,
     [](auto &amp; x){ process(x); }
@@ -56,6 +57,7 @@ std::transform(xfirst, xlast, yfirst,
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 std::for_each(std::par, first, last,
     [](auto &amp; x){ process(x); }

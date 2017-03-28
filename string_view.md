@@ -35,6 +35,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 Foo parseFoo(std::string const &amp; input);
 Foo parseFoo(char const * str);
@@ -48,6 +49,7 @@ Foo parseFoo(MyString const &amp; str);
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 Foo parseFoo(std::string_view input);
 

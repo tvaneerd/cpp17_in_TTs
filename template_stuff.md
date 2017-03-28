@@ -12,6 +12,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 template &lt;typename T, T v&gt;
 struct integral_constant
@@ -23,6 +24,7 @@ integral_constant&lt;char, 'a'&gt;::value
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 template &lt;auto v&gt;
 struct integral_constant
@@ -55,6 +57,7 @@ How do you write `sum()` ?
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 auto x = sum(5, 8);
 auto y = sum(a, b, 17, 3.14, etc);
@@ -74,6 +77,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 auto sum() { return 0; }
 
@@ -87,6 +91,7 @@ auto sum(T&amp;&amp; t, Rest&amp;&amp;... r) {
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 
 

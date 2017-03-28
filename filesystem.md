@@ -12,6 +12,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 #include &lt;windows.h&gt;
 
@@ -59,6 +60,7 @@ void display_contents(std::wstring const &amp; p) {
 </pre>
 </td>
 <td  valign="top" rowspan="3">
+
 <pre lang="cpp">
 #include &lt;filesystem&gt;
 #include &lt;iostream&gt;
@@ -101,6 +103,7 @@ C++14 POSIX
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 #include &lt;dirent.h&gt;
 #include &lt;sys/stat.h&gt;

@@ -14,6 +14,7 @@ C++17
 </tr>
 <tr>
 <td  valign="top">
+
 <pre lang="cpp">
 pair&lt;int, string&gt; is1 = pair&lt;int, string&gt;(17, "hello");
 auto is2 = std::pair&lt;int, string&gt;(17, "hello");
@@ -22,6 +23,7 @@ auto is4 = std::make_pair(17, "hello"s);
 </pre>
 </td>
 <td  valign="top">
+
 <pre lang="cpp">
 pair&lt;int, string&gt; is1 = pair(17, "hello");
 auto is2 = pair(17, "hello"); // !! pair&lt;int, char const *&gt;
@@ -49,7 +51,7 @@ Thingy(const char *) -> Thingy&lt;std::string&gt;;
 
 Thingy thing{"A String"}; // thing.t is a `std::string`.
 </pre>
-_(example from Nicol Bolas)_
+_(example from "Nicol Bolas")_
 
 
 #### Implicit Deduction Guides
