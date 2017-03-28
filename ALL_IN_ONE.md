@@ -1819,7 +1819,7 @@ In a nutshell,
 C++14
 </th>
 <th>
-C++17
+Concepts TS
 </th>
 </tr>
 <tr>
