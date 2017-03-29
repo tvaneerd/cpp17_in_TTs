@@ -363,7 +363,7 @@ C++17
    Foo stuff();
      
      
-   auto [ i, s ] = stuff();
+   auto [ i, s ] = stuff;
 
 
    use(s, ++i);
@@ -379,7 +379,7 @@ C++17
    
    Foo stuff();
    
-   Foo __tmp = stuff();
+   Foo __tmp = stuff;
    auto &amp; i = __tmp.x;
    auto &amp; s = __tmp.str;
 
@@ -417,7 +417,7 @@ C++17
    
    Foo stuff();
 
-   auto [ i, s ] = stuff();
+   auto [ i, s ] = stuff;
 
    use(s, ++i);
 </pre>
