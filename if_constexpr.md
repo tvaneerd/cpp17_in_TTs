@@ -24,23 +24,39 @@ class Foo {
   int myInt;
   string myString;
 public:
-  int const &amp; refInt() { return myInt; }
-  string const &amp; refString() { return myString; }
+  int const &amp; refInt() const
+  { return myInt; }
+  string const &amp; refString() const
+  { return myString; }
 };
 
-
+namespace std
+{
+   template&lt;&gt; class tuple_size&lt;Foo&gt;
+       : public integral_constant&lt;int, 2&gt;
+   { };
+   template&lt;int N> class tuple_element&lt;N, Foo&gt;
+   {
+   public:
+      using type =
+      conditional_t&lt;N==0,int const &amp;,string const &amp;>;
+   };
+}
 
 // Hey compiler, keep an eye out for this template:
-template&lt;int N&gt; void get(Foo const &amp; foo)
+template&lt;int N&gt; std::tuple_element_t&lt;N,Foo&gt;
+get(Foo const &amp; foo)
 {
   static_assert(false, "Foo only has 2 members");
 }
 // here's some specializations (the real stuff)
-template&lt;&gt; int const &amp; get&lt;0&gt;(Foo const &amp; foo)
+template&lt;&gt; std::tuple_element_t&lt;N,Foo&gt;
+get&lt;0&gt;(Foo const &amp; foo)
 {
   return foo.refInt();
 }
-template&lt;&gt; string const &amp; get&lt;1&gt;(Foo const &amp; foo)
+template&lt;&gt; std::tuple_element_t&lt;N,Foo&gt;
+get&lt;1&gt;(Foo const &amp; foo)
 {
   return foo.refString();
 }
@@ -53,10 +69,24 @@ class Foo {
   int myInt;
   string myString;
 public:
-  int const &amp; refInt() { return myInt; }
-  string const &amp; refString() { return myString; }
+  int const &amp; refInt() const
+  { return myInt; }
+  string const &amp; refString() const
+  { return myString; }
 };
 
+namespace std
+{
+   template&lt;&gt; class tuple_size&lt;Foo&gt;
+       : public integral_constant&lt;int, 2&gt;
+   { };
+   template&lt;int N> class tuple_element&lt;N, Foo&gt;
+   {
+   public:
+      using type =
+      conditional_t&lt;N==0,int const &amp;,string const &amp;>;
+   };
+}
 
 
 template&lt;int N&gt; auto &amp; get(Foo const &amp; foo)
