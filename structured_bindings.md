@@ -14,9 +14,9 @@ C++17
 <td  valign="top">
 
 <pre lang="cpp">
-   tuple&lt;int, string&gt; stuff();
+   tuple&lt;int, string&gt; func();
    
-   auto tup = stuff();
+   auto tup = func();
    int i = get&lt;0&gt;(tup);
    string s = get&lt;1&gt;(tup);
   
@@ -26,11 +26,11 @@ C++17
 <td  valign="top">
 
 <pre lang="cpp">
-   tuple&lt;int, string&gt; stuff();
+   tuple&lt;int, string&gt; func();
    
    int i;
    string s;
-   std::tie(i,s) = stuff();
+   std::tie(i,s) = func();
 
    use(s, ++i);
 </pre>
@@ -38,10 +38,10 @@ C++17
 <td valign="top">
 
 <pre lang="cpp">
-   tuple&lt;int, string&gt; stuff();
+   tuple&lt;int, string&gt; func();
    
    
-   auto [ i, s ] = stuff();
+   auto [ i, s ] = func();
 
 
    use(s, ++i);
@@ -65,10 +65,10 @@ compiler
 <td valign="top">
 
 <pre lang="cpp">
-   pair&lt;int, string&gt; stuff();
+   pair&lt;int, string&gt; func();
    
    
-   auto [ i, s ] = stuff();
+   auto [ i, s ] = func();
 
 
    use(s, ++i);
@@ -77,7 +77,7 @@ compiler
 <td valign="top">
 
 <pre lang="cpp">
-   pair&lt;int, string&gt; stuff();
+   pair&lt;int, string&gt; func();
    
    auto __tmp = stuff();
    auto &amp; i = get&lt;0&gt;(__tmp);
@@ -211,7 +211,7 @@ compiler
 </table>
 
 
-Wait, pair and tuple are not magic (just nearly impossible to write to STL level), can *my* types work with this?
+Wait, pair and tuple are not magic (just nearly impossible to write to STL quality), can *my* types work with this?
 
 **YES**.  The compiler uses `get<N>()` if available, or can work with plain structs directly:
 
@@ -233,10 +233,10 @@ C++17
       string str;
    };
    
-   Foo stuff();
+   Foo func();
      
      
-   auto [ i, s ] = stuff();
+   auto [ i, s ] = func();
 
 
    use(s, ++i);
@@ -250,9 +250,9 @@ C++17
       string str;
    };
    
-   Foo stuff();
+   Foo func();
    
-   Foo __tmp = stuff();
+   Foo __tmp = func();
    auto &amp; i = __tmp.x;
    auto &amp; s = __tmp.str;
 
@@ -262,8 +262,9 @@ C++17
 </table>
 
 
-**Implement your own get()**
+**Implement your own get(), tuple_size, tuple_element**
 
+For any class/struct that doesn't work by default, you need to implement your own custom `get<>()` and you also need to implement `tuple_size` and `tuple_element`.
 
 <table>
 <tr>
@@ -278,19 +279,24 @@ C++17
    class Foo {
       // ...
    public:
-      template &lt;int N&gt; auto get() /*const?*/ { /*...*/ }
+      template &lt;int N&gt; auto &amp; get() /*const?*/ { /*...*/ }
    };
-   namespace std {
-      template ... tuple_size ...
-      template ... tuple_element ...
-   }
    // or get outside class
-   template&lt;int N&gt; auto get(Foo /*const?*/ &amp; foo) { /*...*/ }
+   template&lt;int N&gt; auto &amp; get(Foo /*const?*/ &amp; foo) { /*...*/ }
    //...
    
-   Foo stuff();
+   // tuple_size/element specialized
+   // yes, in namespace std
+   namespace std {
+      // how many elements does Foo have
+      template&lt;&gt; struct tuple_size&lt;Foo&gt; { static const int value = 3; }
+      // what type is element N
+      template&lt;int N&gt; struct tuple_element&lt;N, Foo&gt; { using type = ...add code here...; }
+   }
+   
+   Foo func();
 
-   auto [ i, s ] = stuff();
+   auto [ i, s ] = func();
 
    use(s, ++i);
 </pre>
