@@ -43,19 +43,16 @@ namespace std
    };
 }
 
-// Hey compiler, keep an eye out for this template:
 template&lt;int N&gt; std::tuple_element_t&lt;N,Foo&gt;
-get(Foo const &amp; foo)
-{
-  static_assert(false, "Foo only has 2 members");
-}
+get(Foo const &amp;);
+
 // here's some specializations (the real stuff)
-template&lt;&gt; std::tuple_element_t&lt;N,Foo&gt;
+template&lt;&gt; std::tuple_element_t&lt;0,Foo&gt;
 get&lt;0&gt;(Foo const &amp; foo)
 {
   return foo.refInt();
 }
-template&lt;&gt; std::tuple_element_t&lt;N,Foo&gt;
+template&lt;&gt; std::tuple_element_t&lt;1,Foo&gt;
 get&lt;1&gt;(Foo const &amp; foo)
 {
   return foo.refString();
