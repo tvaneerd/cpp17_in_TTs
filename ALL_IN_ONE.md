@@ -206,7 +206,7 @@ compiler
 <pre lang="cpp">
    pair&lt;int, string&gt; func();
    
-   auto __tmp = stuff();
+   auto __tmp = func();
    auto &amp; i = get&lt;0&gt;(__tmp);
    auto &amp; s = get&lt;1&gt;(__tmp);
 
@@ -219,7 +219,7 @@ compiler
 
 Note, in the above, `__tmp` is a copy, but `i` and `s` are references. Or I should say "references" in quotes. Not exactly references, but real compiler synonyms for the members. (They are not real references as things like `decltype` "look through" the references to the actual members.)
 
-So even though `auto [i,s] = stuff();` has no `&` anywhere, there are still references involved.  For example:
+So even though `auto [i,s] = func();` has no `&` anywhere, there are still references involved.  For example:
 
 <table>
 <tr>
