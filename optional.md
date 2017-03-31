@@ -83,6 +83,16 @@ if (ofoo)
 <td  valign="top">
 
 <pre lang="cpp">
+// nicer with new if syntax:
+if (optional ofoo = parseFoo(str); ofoo)
+   use(*ofoo);
+</pre>
+</td>
+</tr>
+<tr>
+<td  valign="top">
+
+<pre lang="cpp">
 optional&lt;int&gt; oi = parseInt(str);
 std::cout &lt;&lt; oi.value_or(0);
 </pre>
