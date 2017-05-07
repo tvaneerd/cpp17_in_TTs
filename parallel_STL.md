@@ -59,7 +59,7 @@ std::transform(xfirst, xlast, yfirst,
 <td  valign="top">
 
 <pre lang="cpp">
-std::for_each(std::par, first, last,
+std::for_each(std::execution::par, first, last,
     [](auto &amp; x){ process(x); }
 );
 std::copy(std::execution::par, first, last, output);
