@@ -9,7 +9,8 @@ Or look at them all at once in [ALL_IN_ONE.md](ALL_IN_ONE.md) (which is regenera
 Some sources and/or places for good C++17 info:
 
 https://jfbastien.github.io/what-is-cpp17/#/  
-http://www.bfilipek.com/2017/01/cpp17features.html  
+http://www.bfilipek.com/2017/01/cpp17features.html
+https://github.com/AnthonyCalandra/modern-cpp-features
 http://en.cppreference.com  
 http://stackoverflow.com
 Bryce Adelstein Lelbach's talk to be seen at C++Now 2017
