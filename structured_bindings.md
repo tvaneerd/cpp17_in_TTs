@@ -202,7 +202,7 @@ compiler
    auto &amp; __tmp3 = makeX(); //error: non-const ref cannot bind to temp
    
    auto &amp; _tmp3 = x;
-   x.i++;
+   _tmp3.i++;
    auto const &amp; _tmp4 = makeX();
    __tmp4.i++; //error: can't modify const
 </pre>
