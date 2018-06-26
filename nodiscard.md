@@ -18,7 +18,7 @@ void steal_ownership(MyOwningPointer& ptr) {
 }
 </pre>
 
-C++20 provides the `[[nodiscard]]` attribute to encourage compilers to
+C++17 provides the `[[nodiscard]]` attribute to encourage compilers to
 emit a warning when the result of a function is potentially discarded:
 
 Code
