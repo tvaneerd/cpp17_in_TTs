@@ -17,7 +17,4 @@ Bryce Adelstein Lelbach's talk to be seen at C++Now 2017
 https://skebanga.github.io/structured-bindings/ (structured bindings)
 https://github.com/accuBayArea/Slides/blob/master/slides/2017-04-19.pdf (polymorphic memory resources)
 
-
-**Caveat:** _C++17 is not completed yet.  One or more of these features may be changed or removed._
-
 Created with the support from my employer, [Christie Digital Systems, Inc.](http://christiedigital.com)
